@@ -50,6 +50,19 @@ body::before {
     text-shadow: 0 0 5px #00ff41;
 }
 
+.clickable-cmd {
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    transition: color 0.2s;
+}
+
+.clickable-cmd:hover {
+    color: #00ff41;
+    text-shadow: 0 0 8px #00ff41;
+}
 p {
     margin: 5px 0;
 }
