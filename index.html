@@ -3,20 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mauro Nahuel Uriarte - Lead UI & Gameplay Dev</title>
+    <title>Mauro N. Uriarte | Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="terminal">
-        <div id="output">
-            </div>
-
-        <div id="input-container">
-            <span id="prompt">guest@mauronu.com:~$</span>
-            <input type="text" id="command-input" autocomplete="off" spellcheck="false" autofocus>
+    <header class="top-nav">
+        <div class="user-info">
+            <span class="status-dot"></span> MAURO N. URIARTE // UI_BACKEND_LEAD
         </div>
-    </div>
+        <div class="social-icons">
+            <a href="https://github.com/MauroUr" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/tu-perfil" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </header>
+
+    <main class="terminal-container">
+        <nav class="side-nav">
+            <button class="nav-btn" onclick="showSection('about')">[ SOBRE_MÍ ]</button>
+            <button class="nav-btn" onclick="showSection('skills')">[ HABILIDADES ]</button>
+            <button class="nav-btn" onclick="showSection('projects')">[ PROYECTOS ]</button>
+        </nav>
+
+        <section class="console-screen">
+            <div id="console-output"></div>
+
+            <div id="project-showcase" style="display: none;">
+                
+                <section class="filter-section">
+                    <span class="filter-label">Filtros:</span>
+                    <button class="filter-btn active" onclick="filterProjects('all')">[ Todos ]</button>
+                    <button class="filter-btn" onclick="filterProjects('webgl')">[ WebGL / Web ]</button>
+                    <button class="filter-btn" onclick="filterProjects('pc')">[ PC (.exe) ]</button>
+                    <button class="filter-btn" onclick="filterProjects('personal')">[ Personales ]</button>
+                </section>
+
+                <section class="project-grid">
+                    <article class="project-card webgl">
+                        <div class="card-header">sys.run("UI_Showcase.exe")</div>
+                        <div class="card-content">
+                            <h3>Sistemas de UI AAA (WebGL Demo)</h3>
+                            <p>Demostración interactiva de interfaces. Creado con Unity URP.</p>
+                            <div class="webgl-container">
+                                <iframe src="" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card pc personal">
+                        <div class="card-header">sys.run("Roguelike_Gen.exe")</div>
+                        <div class="card-content">
+                            <h3>Generador Procedural Roguelike</h3>
+                            <p>Algoritmo de generación de mazmorras (Worm-based). Escrito en C#.</p>
+                            <a href="#" download class="download-btn">
+                                <i class="fas fa-download"></i> Descargar Build (.exe)
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal">
+                        <div class="card-header">sys.read("Donations_Backend.log")</div>
+                        <div class="card-content">
+                            <h3>Backend de Donaciones (I+D)</h3>
+                            <p>Sistema modular de persistencia en la nube utilizando JSON.</p>
+                            <a href="https://github.com/MauroUr/tu-repo" target="_blank" class="download-btn">
+                                <i class="fab fa-github"></i> Ver Código Fuente
+                            </a>
+                        </div>
+                    </article>
+                </section>
+
+            </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
