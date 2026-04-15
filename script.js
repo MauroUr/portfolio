@@ -43,7 +43,7 @@ function typeWriter(text, i, currentKey) {
         output.textContent += text.charAt(i);
         
         i++;
-        typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 12); 
+        typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 6); 
         
         const consoleScreen = document.querySelector('.console-screen');
         consoleScreen.scrollTop = consoleScreen.scrollHeight;
