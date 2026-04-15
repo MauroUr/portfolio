@@ -25,4 +25,31 @@ body::before {
 .terminal {
     text-shadow: 0 0 5px #00ff41;
     z-index: 1;
+    width: 80vw;
+    height: 80vh;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#input-container {
+    display: flex;
+    align-items: center;
+}
+
+#command-input {
+    background: transparent;
+    border: none;
+    color: #00ff41;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    outline: none;
+    flex-grow: 1;
+    margin-left: 10px;
+    text-shadow: 0 0 5px #00ff41;
+}
+
+p {
+    margin: 5px 0;
 }
