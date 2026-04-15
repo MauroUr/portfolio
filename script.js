@@ -3,11 +3,11 @@ const outputArea = document.getElementById("output");
 
 const commands = {
     help: `
-        <span style="color: #fff;">Comandos disponibles:</span><br>
-        - <b>about</b>    : Información del sistema y perfil del desarrollador.<br>
-        - <b>skills</b>   : Stack tecnológico y áreas de especialidad.<br>
-        - <b>projects</b> : Registro de misiones y proyectos destacados.<br>
-        - <b>clear</b>    : Limpia el buffer de la pantalla.
+        <span style="color: #fff;">Comandos disponibles (Hacé clic en uno o escribilo):</span><br>
+        - <span class="clickable-cmd" onclick="runCommand('about')">about</span>    : Información del sistema y perfil del desarrollador.<br>
+        - <span class="clickable-cmd" onclick="runCommand('skills')">skills</span>   : Stack tecnológico y áreas de especialidad.<br>
+        - <span class="clickable-cmd" onclick="runCommand('projects')">projects</span> : Registro de misiones y proyectos destacados.<br>
+        - <span class="clickable-cmd" onclick="runCommand('clear')">clear</span>    : Limpia el buffer de la pantalla.
     `,
     about: `
         [ CARGANDO PERFIL... ]<br>
@@ -40,23 +40,21 @@ const commands = {
 inputField.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         const commandText = inputField.value.trim().toLowerCase();
-        
         inputField.value = ""; 
-
-        printTerminal(`<br><span style="color: #fff;">guest@mauronu.com:~$</span> ${commandText}`);
-
-        processCommand(commandText);
+        executeCommand(commandText);
     }
 });
 
-function processCommand(cmd) {
+function executeCommand(cmd) {
     if (cmd === "") return;
+
+    printTerminal(`<br><span style="color: #fff;">guest@mauronu.com:~$</span> ${cmd}`);
 
     if (cmd === "clear") {
         outputArea.innerHTML = `
             <p>MAURO-OS v2.0.26 (tty1)</p>
             <br>
-            <p>Welcome to the Dev Sandbox. Type 'help' to see available commands.</p>
+            <p>Welcome to the Dev Sandbox. Type or click 'help' to see available commands.</p>
             <br>
         `;
         return;
@@ -67,18 +65,31 @@ function processCommand(cmd) {
     if (response) {
         printTerminal(response);
     } else {
-        printTerminal(`<span style="color: red;">Error: Comando no reconocido '${cmd}'. Escribí 'help' para ver la lista de comandos.</span>`);
+        printTerminal(`<span style="color: red;">Error: Comando no reconocido '${cmd}'. Escribí 'help' para ver la lista.</span>`);
     }
+}
+
+function runCommand(cmd) {
+    executeCommand(cmd);
+    inputField.focus(); // Devuelve el cursor al input
 }
 
 function printTerminal(htmlContent) {
     const p = document.createElement("p");
     p.innerHTML = htmlContent;
     outputArea.appendChild(p);
-
     window.scrollTo(0, document.body.scrollHeight);
 }
 
-document.addEventListener("click", () => {
-    inputField.focus();
+document.addEventListener("click", (e) => {
+    if (!e.target.classList.contains('clickable-cmd')) {
+        inputField.focus();
+    }
 });
+
+setTimeout(() => {
+    executeCommand('about');
+    setTimeout(() => {
+        printTerminal(`<br><span style="color: #aaaaaa;"><i>[Sistema]: Te sugiero probar el comando <span class="clickable-cmd" onclick="runCommand('help')">help</span></i></span>`);
+    }, 800);
+}, 1000);
