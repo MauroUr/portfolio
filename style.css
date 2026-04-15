@@ -219,7 +219,7 @@ body::before {
     color: #00ff41;
 }
 
-.card-subtitle {
+.card-content .card-subtitle {
     color: #ccc;
     margin: 0 0 10px 0;
     font-size: 0.88rem;
