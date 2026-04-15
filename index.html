@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mauro Nahuel Uriarte - Dev Terminal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="terminal">
+        <div id="output">
+            <p>MAURO-OS v2.0.26 (tty1)</p>
+            <p>Initializing boot sequence...</p>
+            <p>[ OK ] Mounting File Systems</p>
+            <p>[ OK ] Loading URP Shaders</p>
+            <p>[ OK ] Starting UI Backend Services</p>
+            <p>[ OK ] Initializing Procedural Generation Logic</p>
+            <br>
+            <p>Welcome to the Dev Sandbox. Type 'help' to see available commands.</p>
+            <br>
+        </div>
+
+        <div id="input-container">
+            <span id="prompt">guest@mauronu.com:~$</span>
+            <input type="text" id="command-input" autocomplete="off" spellcheck="false" autofocus>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
