@@ -1,69 +1,65 @@
 const output = document.getElementById('console-output');
 const projectShowcase = document.getElementById('project-showcase');
-let typingTimeout; // Para frenar la animación si cambian de sección rápido
+let typingTimeout; // To stop animation if user clicks another section quickly
 
 const data = {
-    about: `> INICIANDO RECUPERACIÓN DE PERFIL...
-> NOMBRE: Mauro Nahuel Uriarte
-> ROL: Unity UI & Gameplay Programmer
-> ESTADO: Lead UI Backend
-> UBICACIÓN: Buenos Aires, Argentina
-> INFO: Especializado en optimización de performance móvil, profiling y arquitecturas escalables para interfaces de usuario en entornos AAA.`,
+    about: `> INITIATING PROFILE RETRIEVAL...
+> NAME: Mauro Nahuel Uriarte
+> ROLE: Unity UI & Gameplay Programmer
+> STATUS: Lead UI Backend
+> LOCATION: Buenos Aires, Argentina
+> INFO: Specialized in mobile performance optimization, profiling, and scalable architectures for user interfaces in AAA environments.`,
             
-    skills: `> ESCANEANDO STACK TECNOLÓGICO...
-> LENGUAJES: C#, C++, Java, Swift, Objective-C, Kotlin.
+    skills: `> SCANNING TECH STACK...
+> LANGUAGES: C#, C++, Java, Swift, Objective-C, Kotlin.
 > UNITY: Core, UI Toolkit, URP, Memory Management.
-> SISTEMAS: Procedural Generation, Git, Von Neumann/Harvard Architectures.`,
+> SYSTEMS: Procedural Generation, Git, Von Neumann/Harvard Architectures.`,
              
-    projects: `> ACCEDIENDO A ARCHIVOS DE PRODUCCIÓN...
-> CARGANDO FILTROS Y MÓDULOS...
-> LISTO.`
+    projects: `> ACCESSING PRODUCTION FILES...
+> LOADING FILTERS AND MODULES...
+> READY.`
 };
 
 function showSection(key) {
-    // 1. Limpiar todo y resetear estados
+    // 1. Clear everything and reset states
     clearTimeout(typingTimeout);
-    output.innerHTML = ""; 
-    projectShowcase.style.display = 'none'; // Ocultar los juegos al cambiar de sección
+    output.textContent = ""; // Use textContent instead of innerHTML for better performance and to prevent HTML parsing bugs
+    projectShowcase.style.display = 'none'; 
     
-    // 2. Animar el texto correspondiente
+    // 2. Animate the corresponding text
     typeWriter(data[key], 0, key);
 }
 
 function typeWriter(text, i, currentKey) {
     if (i < text.length) {
-        // Reemplazar saltos de línea con <br> para que se vea bien en HTML
-        let char = text.charAt(i);
-        if (char === '\n') {
-            output.innerHTML += '<br>';
-        } else {
-            output.innerHTML += char;
-        }
+        // Append raw text character by character
+        output.textContent += text.charAt(i);
         
         i++;
-        typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 20); // Velocidad
+        // Adjust speed here (25ms is a good standard for terminal effects)
+        typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 25); 
         
         // Auto-scroll
         const consoleScreen = document.querySelector('.console-screen');
         consoleScreen.scrollTop = consoleScreen.scrollHeight;
     } else {
-        // 3. Si terminó de tipear y estábamos en "projects", mostramos la grilla
+        // 3. When typing finishes, show the grid if we are in "projects"
         if (currentKey === 'projects') {
             projectShowcase.style.display = 'block';
             const consoleScreen = document.querySelector('.console-screen');
-            consoleScreen.scrollTop = consoleScreen.scrollHeight; // Scroll para ver la grilla
+            consoleScreen.scrollTop = consoleScreen.scrollHeight; // Scroll to reveal grid
         }
     }
 }
 
-// Lógica de los Filtros de Juegos
+// Logic for Project Filters
 function filterProjects(category) {
-    // Manejar el botón activo
+    // Handle active button styling
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     event.currentTarget.classList.add('active');
 
-    // Filtrar tarjetas
+    // Filter project cards
     const projects = document.querySelectorAll('.project-card');
     projects.forEach(project => {
         if (category === 'all' || project.classList.contains(category)) {
@@ -74,5 +70,5 @@ function filterProjects(category) {
     });
 }
 
-// Cargar la sección "Sobre Mí" por defecto al entrar a la página
+// Load "About Me" by default on boot
 window.onload = () => showSection('about');

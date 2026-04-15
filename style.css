@@ -188,3 +188,10 @@ body::before {
     background-color: #00ff41;
     color: #0a0a0a;
 }
+
+#console-output {
+    margin-bottom: 20px;
+    line-height: 1.5;
+    /* ESTA ES LA MAGIA: Respeta los \n del JavaScript sin necesidad de usar <br> */
+    white-space: pre-wrap; 
+}
