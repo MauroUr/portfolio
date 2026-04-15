@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden; 
+    font-size: 1.2rem; /* <-- LETRA BASE MÁS GRANDE (1.2 veces el tamaño normal) */
 }
 
 /* Efecto CRT Scanlines */
@@ -45,7 +46,7 @@ body::before {
 .social-icons a {
     color: #00ff41;
     margin-left: 20px;
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Íconos sociales más grandes */
     text-decoration: none;
     transition: text-shadow 0.2s;
 }
@@ -74,12 +75,13 @@ body::before {
     background: none;
     border: 1px solid #00ff41;
     color: #00ff41;
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
     text-align: left;
     transition: all 0.2s;
     font-family: inherit;
     font-weight: bold;
+    font-size: 1.1rem; /* Botones del menú más grandes */
 }
 
 .nav-btn:hover {
@@ -100,7 +102,9 @@ body::before {
 
 #console-output {
     margin-bottom: 20px;
-    line-height: 1.5;
+    line-height: 1.6;
+    white-space: pre-wrap; /* Respeta los \n del JS */
+    font-size: 1.15rem; /* Texto de la consola un poco más grande */
 }
 
 /* --- SECCIÓN DE PROYECTOS Y FILTROS --- */
@@ -115,7 +119,7 @@ body::before {
     border: none;
     color: #555;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 1.1rem; /* Filtros más grandes */
     cursor: pointer;
     transition: all 0.3s;
     margin-right: 15px;
@@ -145,7 +149,7 @@ body::before {
     color: #0a0a0a;
     padding: 5px 10px;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 1rem; /* Encabezado de la tarjeta más grande */
 }
 
 .card-content {
@@ -157,7 +161,7 @@ body::before {
 
 .card-content h3 {
     margin-top: 0;
-    font-size: 1.1rem;
+    font-size: 1.4rem; /* Título de los juegos más grande */
 }
 
 .webgl-container {
@@ -182,16 +186,10 @@ body::before {
     text-align: center;
     text-decoration: none;
     transition: all 0.2s;
+    font-size: 1.1rem; /* Botones de descarga/links más grandes */
 }
 
 .download-btn:hover {
     background-color: #00ff41;
     color: #0a0a0a;
-}
-
-#console-output {
-    margin-bottom: 20px;
-    line-height: 1.5;
-    /* ESTA ES LA MAGIA: Respeta los \n del JavaScript sin necesidad de usar <br> */
-    white-space: pre-wrap; 
 }
