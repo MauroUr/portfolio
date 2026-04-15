@@ -15,7 +15,7 @@
         </div>
         <div class="social-icons">
             <a href="https://github.com/MauroUr" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/tu-perfil" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/mauronu/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
         </div>
     </header>
 
@@ -34,13 +34,28 @@
                 <section class="filter-section">
                     <span class="filter-label">Filters:</span>
                     <button class="filter-btn active" onclick="filterProjects('all')">[ All ]</button>
+                    <button class="filter-btn" onclick="filterProjects('professional')">[ Professional ]</button>
+                    <button class="filter-btn" onclick="filterProjects('personal')">[ Personal ]</button>
                     <button class="filter-btn" onclick="filterProjects('webgl')">[ WebGL / Web ]</button>
                     <button class="filter-btn" onclick="filterProjects('pc')">[ PC (.exe) ]</button>
-                    <button class="filter-btn" onclick="filterProjects('personal')">[ Personal ]</button>
                 </section>
 
                 <section class="project-grid">
-                    <article class="project-card webgl">
+                    
+                    <article class="project-card professional">
+                        <div class="card-header">sys.run("GodOfWar_UI.exe")</div>
+                        <div class="card-content">
+                            <h3>God of War: Sons of Sparta</h3>
+                            <p style="color: #fff; margin-bottom: 5px;"><strong>Mega Cat Studios</strong> | UI Backend Developer</p>
+                            <p>Implemented and maintained UI features in a production environment. Built reusable UI components, editor tooling, and scalable UI systems.</p>
+                            
+                            <a href="https://store.playstation.com/en-us/concept/10012744/" target="_blank" class="download-btn" style="margin-top: auto;">
+                                <i class="fab fa-playstation"></i> PS Store
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card webgl personal">
                         <div class="card-header">sys.run("UI_Showcase.exe")</div>
                         <div class="card-content">
                             <h3>AAA UI Systems (WebGL Demo)</h3>
@@ -51,7 +66,25 @@
                         </div>
                     </article>
 
-                    <article class="project-card pc personal">
+                    <article class="project-card personal pc">
+                        <div class="card-header">sys.run("Mawasure_RPG.exe")</div>
+                        <div class="card-content">
+                            <h3>Mawasure</h3>
+                            <p style="color: #fff; margin-bottom: 5px;"><strong>3D RPG Prototype (Unity)</strong></p>
+                            <p>Modular spell system utilizing ScriptableObjects and a Custom Editor. Heavily optimized using advanced design patterns (Object Pool, Service Locator, Command, State Machine).</p>
+                            
+                            <div style="display: flex; gap: 10px; margin-top: auto; flex-wrap: wrap;">
+                                <a href="https://mauronu.itch.io/mawasure" target="_blank" class="download-btn" style="flex: 1;">
+                                    <i class="fas fa-gamepad"></i> Play on Itch.io
+                                </a>
+                                <a href="https://github.com/MauroUr/Mawasure" target="_blank" class="download-btn" style="flex: 1;">
+                                    <i class="fab fa-github"></i> View Repo
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal pc">
                         <div class="card-header">sys.run("Roguelike_Gen.exe")</div>
                         <div class="card-content">
                             <h3>Roguelike Procedural Generator</h3>
@@ -62,7 +95,19 @@
                         </div>
                     </article>
 
-                    <article class="project-card personal">
+                    <article class="project-card personal pc">
+                        <div class="card-header">sys.run("ShadowBound.exe")</div>
+                        <div class="card-content">
+                            <h3>ShadowBound</h3>
+                            <p style="color: #fff; margin-bottom: 5px;"><strong>Dungeon-Management Strategy (Unity)</strong></p>
+                            <p>Led enemy AI development using custom Decision Trees and FSM. Implemented third-person player controller and global event-driven systems.</p>
+                            <a href="https://mauronu.itch.io" target="_blank" class="download-btn">
+                                <i class="fas fa-link"></i> Itch.io Profile
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal webgl">
                         <div class="card-header">sys.read("Donations_Backend.log")</div>
                         <div class="card-content">
                             <h3>Donations Backend (R&D)</h3>
@@ -72,6 +117,7 @@
                             </a>
                         </div>
                     </article>
+
                 </section>
 
             </div>
