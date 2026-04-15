@@ -3,26 +3,26 @@ const projectShowcase = document.getElementById('project-showcase');
 let typingTimeout;
 
 const data = {
-    about: `> INICIANDO RECUPERACIÓN DE PERFIL...
-> NOMBRE: Mauro Nahuel Uriarte
-> ROL: Unity UI & Gameplay Programmer
-> ESTADO: Lead UI Backend
-> UBICACIÓN: Buenos Aires, Argentina
-> INFO: Especializado en optimización de performance móvil, profiling y arquitecturas escalables para interfaces de usuario en entornos AAA.`,
+    about: `> INITIATING PROFILE RETRIEVAL...
+> NAME: Mauro Nahuel Uriarte
+> ROLE: Unity UI & Gameplay Programmer
+> STATUS: Lead UI Backend
+> LOCATION: Buenos Aires, Argentina
+> INFO: Specialized in mobile performance optimization, profiling, and scalable architectures for user interfaces in AAA environments.`,
 
-    skills: `> ESCANEANDO STACK TECNOLÓGICO...
-> LENGUAJES: C#, C++, Java, Swift, Objective-C, Kotlin.
+    skills: `> SCANNING TECH STACK...
+> LANGUAGES: C#, C++, Java, Swift, Objective-C, Kotlin.
 > UNITY: Core, UI Toolkit, URP, Memory Management.
-> SISTEMAS: Procedural Generation, Git, Von Neumann/Harvard Architectures.`,
+> SYSTEMS: Procedural Generation, Git, Von Neumann/Harvard Architectures.`,
 
-    projects: `> ACCEDIENDO A ARCHIVOS DE PRODUCCIÓN...
-> CARGANDO FILTROS Y MÓDULOS...
-> LISTO.`
+    projects: `> ACCESSING PRODUCTION FILES...
+> LOADING FILTERS AND MODULES...
+> READY.`
 };
 
 function showSection(key) {
     clearTimeout(typingTimeout);
-    output.innerHTML = "";
+    output.textContent = "";
     projectShowcase.style.display = 'none';
 
     typeWriter(data[key], 0, key);
@@ -30,15 +30,10 @@ function showSection(key) {
 
 function typeWriter(text, i, currentKey) {
     if (i < text.length) {
-        let char = text.charAt(i);
-        if (char === '\n') {
-            output.innerHTML += '<br>';
-        } else {
-            output.innerHTML += char;
-        }
+        output.textContent += text.charAt(i);
 
         i++;
-        typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 20);
+        typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 25);
 
         const consoleScreen = document.querySelector('.console-screen');
         consoleScreen.scrollTop = consoleScreen.scrollHeight;
