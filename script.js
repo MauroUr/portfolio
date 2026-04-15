@@ -5,22 +5,32 @@ let typingTimeout;
 const data = {
     about: `> INITIATING PROFILE RETRIEVAL...
 > NAME: Mauro Nahuel Uriarte
-> ROLE: Unity UI & Gameplay Programmer
-> STATUS: Lead UI Backend
+> STATUS: Lead UI Backend & Gameplay Programmer
 > LOCATION: Buenos Aires, Argentina
-> INFO: Specialized in mobile performance optimization, profiling, and scalable architectures for user interfaces in AAA environments.`,
+> EXPERIENCE:
+  - Lead UI Backend @ Mega Cat Studios (New Production)
+  - UI Backend Developer @ Mega Cat Studios (God of War: Sons of Sparta)
+  - Full Stack Developer @ Accenture
+> SUMMARY: Unity gameplay programmer focused on modular systems, scalable architecture, and production-ready code.`,
 
     skills: `> SCANNING TECH STACK...
-> LANGUAGES: C#, C++, Java, Swift, Objective-C, Kotlin.
-> UNITY: Core, UI Toolkit, URP, Memory Management.
-> SYSTEMS: Procedural Generation, Git, Von Neumann/Harvard Architectures.`,
+> LANGUAGES: C#, C++, C.
+> ENGINES: Unity, Unreal.
+> GAMEPLAY & SYSTEMS: State Machines, AI Logic, Custom Editors, ScriptableObjects.
+> ENGINEERING: OOP, Profiling, Optimization, CI/CD, APIs.
+> PATTERNS: Object Pool, Service Locator, Command, Abstract Factory, Strategy, Flyweight.`,
 
     projects: `> ACCESSING PRODUCTION FILES...
-> LOADING FILTERS AND MODULES...
+> [1] Unannounced Production (Lead UI/Gameplay)
+> [2] God of War: Sons of Sparta (UI Backend)
+> [3] Mawasure (3D RPG Prototype)
+> [4] ShadowBound (Dungeon-Management)
+> LOADING VISUAL MODULES...
 > READY.`
 };
 
 function showSection(key) {
+
     clearTimeout(typingTimeout);
     output.textContent = "";
     projectShowcase.style.display = 'none';
@@ -49,7 +59,10 @@ function typeWriter(text, i, currentKey) {
 function filterProjects(category) {
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+
+    if (window.event) {
+        window.event.currentTarget.classList.add('active');
+    }
 
     const projects = document.querySelectorAll('.project-card');
     projects.forEach(project => {
