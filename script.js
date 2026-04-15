@@ -83,12 +83,12 @@ const data = {
   (unfinished)`,
 
     projects: `> ACCESSING PROJECT FILES...
-> [1] God of War: Sons of Sparta (UI Backend — AAA)
-> [2] ShadowBound (AI & Gameplay Systems)
-> [3] Mawasure (3D RPG — Design Patterns)
-> [4] Chronicles of a Pixel (2D Action — Beta)
-> [5] Roguelike Procedural Generator (Algorithms)
-> [6] Bears Against Time (Academic — C)
+> [1] God of War: Sons of Sparta — AAA, UI Backend
+> [2] ShadowBound — AI, Decision Trees + FSM
+> [3] Mawasure — RPG, 8 Design Patterns
+> [4] Chronicles of a Pixel — 2D Action, Beta
+> [5] Roguelike Procedural Generator — Algorithms
+> [6] Bears Against Time — C, Academic (FIUBA)
 > LOADING VISUAL MODULES...
 > READY.`
 };
@@ -119,8 +119,6 @@ function typeWriter(text, i, currentKey) {
     } else {
         if (currentKey === 'projects') {
             projectShowcase.style.display = 'block';
-            const consoleScreen = document.querySelector('.console-screen');
-            consoleScreen.scrollTop = consoleScreen.scrollHeight;
         }
     }
 }

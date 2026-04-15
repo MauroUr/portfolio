@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
 }
 
 /* CRT scanline overlay */
@@ -28,7 +28,7 @@ body::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
+    padding: 14px 28px;
     border-bottom: 1px solid #00ff41;
     background: #0a0a0a;
     z-index: 10;
@@ -38,8 +38,9 @@ body::before {
 .user-info {
     display: flex;
     align-items: center;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: bold;
+    letter-spacing: 0.5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -59,13 +60,13 @@ body::before {
 
 .social-icons {
     display: flex;
-    gap: 16px;
+    gap: 18px;
     flex-shrink: 0;
 }
 
 .social-icons a {
     color: #00ff41;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-decoration: none;
     transition: text-shadow 0.2s;
 }
@@ -77,8 +78,8 @@ body::before {
 .terminal-container {
     display: flex;
     flex: 1;
-    padding: 16px;
-    gap: 16px;
+    padding: 18px;
+    gap: 18px;
     overflow: hidden;
 }
 
@@ -87,7 +88,7 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 180px;
+    width: 190px;
     flex-shrink: 0;
 }
 
@@ -95,13 +96,13 @@ body::before {
     background: none;
     border: 1px solid #00ff41;
     color: #00ff41;
-    padding: 10px 12px;
+    padding: 10px 14px;
     cursor: pointer;
     text-align: left;
     transition: all 0.2s;
     font-family: inherit;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
 }
 
 .nav-btn:hover,
@@ -115,24 +116,25 @@ body::before {
     flex: 1;
     background: rgba(0, 20, 0, 0.2);
     border: 1px solid #00ff41;
-    padding: 20px;
+    padding: 24px;
     overflow-y: auto;
     position: relative;
     box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
 }
 
 #console-output {
-    margin-bottom: 16px;
-    line-height: 1.7;
+    margin-bottom: 18px;
+    line-height: 1.8;
     white-space: pre-wrap;
-    font-size: 0.85rem;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
 }
 
 /* === Project Filters === */
 .filter-section {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
     border-left: 3px solid #00ff41;
-    padding-left: 12px;
+    padding-left: 14px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -140,8 +142,8 @@ body::before {
 }
 
 .filter-label {
-    margin-right: 8px;
-    font-size: 0.8rem;
+    margin-right: 10px;
+    font-size: 0.92rem;
 }
 
 .filter-btn {
@@ -149,10 +151,10 @@ body::before {
     border: none;
     color: #555;
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     cursor: pointer;
     transition: all 0.3s;
-    padding: 4px 8px;
+    padding: 5px 10px;
 }
 
 .filter-btn:hover, .filter-btn.active {
@@ -163,8 +165,8 @@ body::before {
 /* === Project Grid === */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
 }
 
 .project-card {
@@ -183,34 +185,56 @@ body::before {
 .card-header {
     background-color: #00ff41;
     color: #0a0a0a;
-    padding: 6px 12px;
+    padding: 6px 14px;
     font-weight: bold;
-    font-size: 0.75rem;
+    font-size: 0.88rem;
+}
+
+.card-img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #00ff41;
+    filter: saturate(0.7) brightness(0.85);
+    transition: filter 0.3s;
+}
+
+.project-card:hover .card-img {
+    filter: saturate(1) brightness(1);
 }
 
 .card-content {
-    padding: 14px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    font-size: 0.8rem;
-    line-height: 1.5;
+    font-size: 0.92rem;
+    line-height: 1.6;
 }
 
 .card-content h3 {
     margin: 0 0 6px 0;
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: #00ff41;
 }
 
 .card-subtitle {
-    color: #fff;
-    margin: 0 0 8px 0;
-    font-size: 0.78rem;
+    color: #ccc;
+    margin: 0 0 10px 0;
+    font-size: 0.88rem;
 }
 
 .card-content p {
     margin: 0 0 8px 0;
+    color: #00ff41;
+}
+
+.card-patterns {
+    font-size: 0.78rem;
+    color: #66cc77;
+    font-style: italic;
+    margin-top: 4px;
 }
 
 .card-links {
@@ -228,14 +252,14 @@ body::before {
 .download-btn {
     display: inline-block;
     margin-top: 15px;
-    padding: 8px 12px;
+    padding: 8px 14px;
     background-color: transparent;
     color: #00ff41;
     border: 1px dashed #00ff41;
     text-align: center;
     text-decoration: none;
     transition: all 0.2s;
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     font-family: inherit;
 }
 
@@ -286,11 +310,11 @@ body::before {
     }
 
     .user-info {
-        font-size: 0.7rem;
+        font-size: 0.78rem;
     }
 
     .social-icons a {
-        font-size: 1rem;
+        font-size: 1.05rem;
     }
 
     .terminal-container {
@@ -312,22 +336,26 @@ body::before {
     .nav-btn {
         white-space: nowrap;
         padding: 8px 12px;
-        font-size: 0.72rem;
+        font-size: 0.8rem;
         flex-shrink: 0;
     }
 
     .console-screen {
-        padding: 14px;
+        padding: 16px;
         overflow-y: visible;
         min-height: 300px;
     }
 
     #console-output {
-        font-size: 0.8rem;
+        font-size: 0.88rem;
     }
 
     .project-grid {
         grid-template-columns: 1fr;
+    }
+
+    .card-img {
+        height: 180px;
     }
 }
 
@@ -338,15 +366,15 @@ body::before {
     }
 
     .user-info {
-        font-size: 0.6rem;
+        font-size: 0.68rem;
     }
 
     .social-icons {
-        gap: 12px;
+        gap: 14px;
     }
 
     .social-icons a {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     .terminal-container {
@@ -359,17 +387,17 @@ body::before {
     }
 
     .nav-btn {
-        padding: 6px 8px;
-        font-size: 0.65rem;
+        padding: 7px 10px;
+        font-size: 0.72rem;
     }
 
     .console-screen {
-        padding: 10px;
+        padding: 12px;
     }
 
     #console-output {
-        font-size: 0.75rem;
-        line-height: 1.6;
+        font-size: 0.82rem;
+        line-height: 1.7;
     }
 
     .filter-section {
@@ -378,24 +406,28 @@ body::before {
     }
 
     .filter-btn {
-        font-size: 0.7rem;
+        font-size: 0.78rem;
         padding: 4px 6px;
     }
 
     .card-content {
-        font-size: 0.75rem;
+        font-size: 0.82rem;
     }
 
     .card-content h3 {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .card-header {
-        font-size: 0.68rem;
+        font-size: 0.75rem;
+    }
+
+    .card-img {
+        height: 150px;
     }
 
     .download-btn {
-        font-size: 0.7rem;
-        padding: 6px 10px;
+        font-size: 0.78rem;
+        padding: 7px 12px;
     }
 }
