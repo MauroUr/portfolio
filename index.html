@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mauro N. Uriarte — Unity UI/Gameplay Programmer. Portfolio showcasing professional and personal game development projects.">
+    <meta property="og:title" content="Mauro N. Uriarte | Unity UI/Gameplay Programmer">
+    <meta property="og:description" content="Portfolio showcasing professional and personal game development projects.">
+    <meta property="og:type" content="website">
     <title>Mauro N. Uriarte | Dev Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,18 +15,22 @@
 
     <header class="top-nav">
         <div class="user-info">
-            <span class="status-dot"></span> MAURO N. URIARTE // UI_BACKEND_LEAD
+            <span class="status-dot"></span> MAURO N. URIARTE // UNITY_UI_GAMEPLAY_DEV
         </div>
         <div class="social-icons">
+            <a href="mailto:mauronuriarte@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
             <a href="https://github.com/MauroUr" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/mauronu/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://mauronu.itch.io" target="_blank" title="Itch.io"><i class="fab fa-itch-io"></i></a>
         </div>
     </header>
 
     <main class="terminal-container">
         <nav class="side-nav">
-            <button class="nav-btn" onclick="showSection('about')">[ ABOUT_ME ]</button>
+            <button class="nav-btn active" onclick="showSection('about')">[ ABOUT_ME ]</button>
             <button class="nav-btn" onclick="showSection('skills')">[ SKILLS ]</button>
+            <button class="nav-btn" onclick="showSection('experience')">[ EXPERIENCE ]</button>
+            <button class="nav-btn" onclick="showSection('education')">[ EDUCATION ]</button>
             <button class="nav-btn" onclick="showSection('projects')">[ PROJECTS ]</button>
         </nav>
 
@@ -30,7 +38,7 @@
             <div id="console-output"></div>
 
             <div id="project-showcase" style="display: none;">
-                
+
                 <section class="filter-section">
                     <span class="filter-label">Filters:</span>
                     <button class="filter-btn active" onclick="filterProjects('all')">[ All ]</button>
@@ -41,56 +49,15 @@
                 </section>
 
                 <section class="project-grid">
-                    
+
                     <article class="project-card professional">
                         <div class="card-header">sys.run("GodOfWar_UI.exe")</div>
                         <div class="card-content">
                             <h3>God of War: Sons of Sparta</h3>
-                            <p style="color: #fff; margin-bottom: 5px;"><strong>Mega Cat Studios</strong> | UI Backend Developer</p>
-                            <p>Implemented and maintained UI features in a production environment. Built reusable UI components, editor tooling, and scalable UI systems.</p>
-                            
+                            <p class="card-subtitle"><strong>Mega Cat Studios</strong> | UI Backend Developer</p>
+                            <p>Contributed to gameplay and UI systems on this AAA title. Built reusable UI components, editor tooling, and scalable systems for designers. Worked within production pipelines collaborating across disciplines.</p>
                             <a href="https://store.playstation.com/en-us/concept/10012744/" target="_blank" class="download-btn" style="margin-top: auto;">
                                 <i class="fab fa-playstation"></i> PS Store
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card webgl personal">
-                        <div class="card-header">sys.run("UI_Showcase.exe")</div>
-                        <div class="card-content">
-                            <h3>AAA UI Systems (WebGL Demo)</h3>
-                            <p>Interactive UI demonstration. Built with Unity URP.</p>
-                            <div class="webgl-container">
-                                <iframe src="" frameborder="0"></iframe>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card personal pc">
-                        <div class="card-header">sys.run("Mawasure_RPG.exe")</div>
-                        <div class="card-content">
-                            <h3>Mawasure</h3>
-                            <p style="color: #fff; margin-bottom: 5px;"><strong>3D RPG Prototype (Unity)</strong></p>
-                            <p>Modular spell system utilizing ScriptableObjects and a Custom Editor. Heavily optimized using advanced design patterns (Object Pool, Service Locator, Command, State Machine).</p>
-                            
-                            <div style="display: flex; gap: 10px; margin-top: auto; flex-wrap: wrap;">
-                                <a href="https://mauronu.itch.io/mawasure" target="_blank" class="download-btn" style="flex: 1;">
-                                    <i class="fas fa-gamepad"></i> Play on Itch.io
-                                </a>
-                                <a href="https://github.com/MauroUr/Mawasure" target="_blank" class="download-btn" style="flex: 1;">
-                                    <i class="fab fa-github"></i> View Repo
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card personal pc">
-                        <div class="card-header">sys.run("Roguelike_Gen.exe")</div>
-                        <div class="card-content">
-                            <h3>Roguelike Procedural Generator</h3>
-                            <p>Worm-based dungeon generation algorithm. Written in C#.</p>
-                            <a href="#" download class="download-btn">
-                                <i class="fas fa-download"></i> Download Build (.exe)
                             </a>
                         </div>
                     </article>
@@ -99,11 +66,55 @@
                         <div class="card-header">sys.run("ShadowBound.exe")</div>
                         <div class="card-content">
                             <h3>ShadowBound</h3>
-                            <p style="color: #fff; margin-bottom: 5px;"><strong>Dungeon-Management Strategy (Unity)</strong></p>
-                            <p>Led enemy AI development using custom Decision Trees and FSM. Implemented third-person player controller and global event-driven systems.</p>
-                            <a href="https://mauronu.itch.io" target="_blank" class="download-btn">
-                                <i class="fas fa-link"></i> Itch.io Profile
+                            <p class="card-subtitle"><strong>Dungeon-Management Action/Strategy (Unity)</strong></p>
+                            <p>Led enemy AI development using custom Decision Trees + FSM architecture. Implemented third-person player controller and global event-driven systems for game-wide communication.</p>
+                            <a href="https://mauronu.itch.io" target="_blank" class="download-btn" style="margin-top: auto;">
+                                <i class="fas fa-gamepad"></i> Itch.io
                             </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal pc">
+                        <div class="card-header">sys.run("Mawasure_RPG.exe")</div>
+                        <div class="card-content">
+                            <h3>Mawasure</h3>
+                            <p class="card-subtitle"><strong>3D RPG Prototype (Unity)</strong></p>
+                            <p>Modular spell system built with ScriptableObjects + custom editor. Strategic combat and UI systems. Applied patterns: Object Pool, Service Locator, Command, State Machine, Strategy.</p>
+                            <div class="card-links">
+                                <a href="https://mauronu.itch.io/mawasure" target="_blank" class="download-btn">
+                                    <i class="fas fa-gamepad"></i> Play on Itch.io
+                                </a>
+                                <a href="https://github.com/MauroUr/Mawasure" target="_blank" class="download-btn">
+                                    <i class="fab fa-github"></i> View Repo
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal pc">
+                        <div class="card-header">sys.run("ChroniclesOfAPixel.exe")</div>
+                        <div class="card-content">
+                            <h3>Chronicles of a Pixel</h3>
+                            <p class="card-subtitle"><strong>2D Action/Skill Game (Unity, Beta)</strong></p>
+                            <p>Designed gameplay systems for 3 levels including spawn logic, difficulty tuning, and beta testing feedback integration.</p>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal pc">
+                        <div class="card-header">sys.run("Roguelike_Gen.exe")</div>
+                        <div class="card-content">
+                            <h3>Roguelike Procedural Generator</h3>
+                            <p class="card-subtitle"><strong>Procedural Dungeon Tool (C#)</strong></p>
+                            <p>Worm-based dungeon generation algorithm. Produces randomized, connected dungeon layouts for roguelike games.</p>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal pc">
+                        <div class="card-header">sys.run("BearsAgainstTime.exe")</div>
+                        <div class="card-content">
+                            <h3>Bears Against Time</h3>
+                            <p class="card-subtitle"><strong>Console Adventure Game (C)</strong></p>
+                            <p>Academic project built entirely in C. Character-specific mechanics, resource/time management, and level logic. Focused on low-level programming fundamentals.</p>
                         </div>
                     </article>
 

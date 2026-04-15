@@ -1,3 +1,4 @@
+/* === Base === */
 body {
     background-color: #050505;
     color: #00ff41;
@@ -6,10 +7,11 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden; 
-    font-size: 2.4rem;
+    overflow: hidden;
+    font-size: 0.9rem;
 }
 
+/* CRT scanline overlay */
 body::before {
     content: "";
     position: fixed;
@@ -21,14 +23,26 @@ body::before {
     pointer-events: none;
 }
 
-/* Header */
+/* === Header === */
 .top-nav {
     display: flex;
     justify-content: space-between;
-    padding: 15px 30px;
+    align-items: center;
+    padding: 12px 24px;
     border-bottom: 1px solid #00ff41;
     background: #0a0a0a;
     z-index: 10;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .status-dot {
@@ -37,15 +51,21 @@ body::before {
     background: #00ff41;
     border-radius: 50%;
     margin-right: 10px;
+    flex-shrink: 0;
     box-shadow: 0 0 8px #00ff41;
     animation: blink 1s step-end infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
 
+.social-icons {
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
 .social-icons a {
     color: #00ff41;
-    margin-left: 20px;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     text-decoration: none;
     transition: text-shadow 0.2s;
 }
@@ -53,39 +73,44 @@ body::before {
     text-shadow: 0 0 10px #00ff41;
 }
 
+/* === Terminal Layout === */
 .terminal-container {
     display: flex;
     flex: 1;
-    padding: 20px;
-    gap: 20px;
+    padding: 16px;
+    gap: 16px;
     overflow: hidden;
 }
 
+/* === Sidebar Nav === */
 .side-nav {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 200px;
+    gap: 8px;
+    width: 180px;
+    flex-shrink: 0;
 }
 
 .nav-btn {
     background: none;
     border: 1px solid #00ff41;
     color: #00ff41;
-    padding: 12px;
+    padding: 10px 12px;
     cursor: pointer;
     text-align: left;
     transition: all 0.2s;
     font-family: inherit;
     font-weight: bold;
-    font-size: 2.2rem;
+    font-size: 0.8rem;
 }
 
-.nav-btn:hover {
+.nav-btn:hover,
+.nav-btn.active {
     background: #00ff41;
     color: #050505;
 }
 
+/* === Console Screen === */
 .console-screen {
     flex: 1;
     background: rgba(0, 20, 0, 0.2);
@@ -97,16 +122,26 @@ body::before {
 }
 
 #console-output {
-    margin-bottom: 20px;
-    line-height: 1.6;
+    margin-bottom: 16px;
+    line-height: 1.7;
     white-space: pre-wrap;
-    font-size: 2.3rem;
+    font-size: 0.85rem;
 }
 
+/* === Project Filters === */
 .filter-section {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     border-left: 3px solid #00ff41;
-    padding-left: 15px;
+    padding-left: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+}
+
+.filter-label {
+    margin-right: 8px;
+    font-size: 0.8rem;
 }
 
 .filter-btn {
@@ -114,10 +149,10 @@ body::before {
     border: none;
     color: #555;
     font-family: inherit;
-    font-size: 2.2rem;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.3s;
-    margin-right: 15px;
+    padding: 4px 8px;
 }
 
 .filter-btn:hover, .filter-btn.active {
@@ -125,10 +160,11 @@ body::before {
     text-shadow: 0 0 5px #00ff41;
 }
 
+/* === Project Grid === */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
 }
 
 .project-card {
@@ -137,28 +173,78 @@ body::before {
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+    transition: box-shadow 0.2s;
+}
+
+.project-card:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.25);
 }
 
 .card-header {
     background-color: #00ff41;
     color: #0a0a0a;
-    padding: 5px 10px;
+    padding: 6px 12px;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 0.75rem;
 }
 
 .card-content {
-    padding: 15px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    font-size: 0.8rem;
+    line-height: 1.5;
 }
 
 .card-content h3 {
-    margin-top: 0;
-    font-size: 2.8rem;
+    margin: 0 0 6px 0;
+    font-size: 1rem;
+    color: #00ff41;
 }
 
+.card-subtitle {
+    color: #fff;
+    margin: 0 0 8px 0;
+    font-size: 0.78rem;
+}
+
+.card-content p {
+    margin: 0 0 8px 0;
+}
+
+.card-links {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+
+.card-links .download-btn {
+    flex: 1;
+}
+
+/* === Buttons === */
+.download-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 12px;
+    background-color: transparent;
+    color: #00ff41;
+    border: 1px dashed #00ff41;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 0.75rem;
+    font-family: inherit;
+}
+
+.download-btn:hover {
+    background-color: #00ff41;
+    color: #0a0a0a;
+}
+
+/* === WebGL Container === */
 .webgl-container {
     width: 100%;
     aspect-ratio: 16/9;
@@ -171,20 +257,145 @@ body::before {
     height: 100%;
 }
 
-.download-btn {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px;
-    background-color: transparent;
-    color: #00ff41;
-    border: 1px dashed #00ff41;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.2s;
-    font-size: 1.1rem;
+/* === Scrollbar === */
+.console-screen::-webkit-scrollbar {
+    width: 6px;
+}
+.console-screen::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+.console-screen::-webkit-scrollbar-thumb {
+    background: #00ff41;
+    border-radius: 3px;
 }
 
-.download-btn:hover {
-    background-color: #00ff41;
-    color: #0a0a0a;
+/* ====================== */
+/* === RESPONSIVE      === */
+/* ====================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .top-nav {
+        padding: 10px 16px;
+    }
+
+    .user-info {
+        font-size: 0.7rem;
+    }
+
+    .social-icons a {
+        font-size: 1rem;
+    }
+
+    .terminal-container {
+        flex-direction: column;
+        padding: 12px;
+        gap: 12px;
+        overflow: visible;
+    }
+
+    .side-nav {
+        flex-direction: row;
+        width: 100%;
+        overflow-x: auto;
+        gap: 6px;
+        flex-shrink: 0;
+        padding-bottom: 4px;
+    }
+
+    .nav-btn {
+        white-space: nowrap;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+        flex-shrink: 0;
+    }
+
+    .console-screen {
+        padding: 14px;
+        overflow-y: visible;
+        min-height: 300px;
+    }
+
+    #console-output {
+        font-size: 0.8rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .top-nav {
+        padding: 8px 12px;
+    }
+
+    .user-info {
+        font-size: 0.6rem;
+    }
+
+    .social-icons {
+        gap: 12px;
+    }
+
+    .social-icons a {
+        font-size: 0.9rem;
+    }
+
+    .terminal-container {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .side-nav {
+        gap: 4px;
+    }
+
+    .nav-btn {
+        padding: 6px 8px;
+        font-size: 0.65rem;
+    }
+
+    .console-screen {
+        padding: 10px;
+    }
+
+    #console-output {
+        font-size: 0.75rem;
+        line-height: 1.6;
+    }
+
+    .filter-section {
+        flex-wrap: wrap;
+        gap: 2px;
+    }
+
+    .filter-btn {
+        font-size: 0.7rem;
+        padding: 4px 6px;
+    }
+
+    .card-content {
+        font-size: 0.75rem;
+    }
+
+    .card-content h3 {
+        font-size: 0.9rem;
+    }
+
+    .card-header {
+        font-size: 0.68rem;
+    }
+
+    .download-btn {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
 }
