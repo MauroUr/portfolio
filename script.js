@@ -4,91 +4,132 @@ let typingTimeout;
 
 const data = {
     about: `> INITIATING PROFILE RETRIEVAL...
+
 > NAME: Mauro Nahuel Uriarte
 > ROLE: Unity UI/Gameplay Programmer
+> FOCUS: Modular systems, scalable architecture,
+        production-ready code
 > LOCATION: Buenos Aires, Argentina
 > CONTACT: mauronuriarte@gmail.com
 
 > SUMMARY:
-  Unity gameplay programmer focused on modular
-  systems, scalable architecture, and production-
-  ready code. Experience building full games and
-  contributing to professional development pipelines.
+  Gameplay programmer specialized in UI systems,
+  gameplay architecture, and editor tooling for
+  Unity. Experienced shipping AAA titles and
+  building modular, pattern-driven game systems.
+
+  Currently at Mega Cat Studios contributing to
+  God of War: Sons of Sparta (PlayStation).
 
 > COMPETENCIES:
-  - Initiative
-  - Communication skills
   - Cross-discipline collaboration
-  - Rapid feature iteration`,
+  - Rapid feature iteration
+  - Technical communication
+  - Initiative & ownership`,
 
     skills: `> SCANNING TECH STACK...
 
-> LANGUAGES: C#, C++, C
-> ENGINES: Unity, Unreal
+> PROGRAMMING:
+  C# ........... [primary — Unity, systems]
+  C++ .......... [Unreal, low-level]
+  C ............ [algorithms, academic]
+  Python ....... [tooling, scripting, automation]
+  SQL .......... [data, queries]
+
+> ENGINES:
+  Unity ........ [professional — current]
+  Unreal ....... [secondary]
 
 > GAMEPLAY & SYSTEMS:
   - Gameplay Programming
-  - State Machines
-  - AI Logic (Decision Trees, FSM)
-  - Systems Design
+  - State Machines & FSM
+  - AI (Decision Trees, Flocking, Steering)
+  - Systems Design & Architecture
 
-> UNITY TOOLS:
-  - ScriptableObjects
-  - Custom Editors
-  - Animation Systems
-  - Input System
+> UNITY TOOLING:
+  - ScriptableObjects (data-driven design)
+  - Custom Editors, Inspectors & Drawers
+  - Animation Systems & Cinemachine
+  - Input System (new)
+  - Addressables (async asset loading)
+  - Odin Inspector, DoTween
+
+> OPTIMIZATION:
+  - Custom PlayerLoop injection (no Update)
+  - Object Pooling (generic, type-safe)
+  - Custom AABB physics (replacing Unity)
+  - MaterialPropertyBlock (GPU batching)
+  - SRP Batcher, platform-specific URP
+  - Event-driven UI (no per-frame polling)
+  - Async scene loading
+  - Profiling & memory management
 
 > ENGINEERING:
-  - OOP, Debugging, Profiling, Optimization
-  - Architecture, Scalable Systems, APIs, CI/CD
+  - OOP, SOLID Principles
+  - Debugging, Profiling, Optimization
+  - Architecture, Scalable Systems
+  - APIs, CI/CD
+  - Git (branching, PRs, conflict resolution)
 
 > DESIGN PATTERNS:
-  - Object Pool, Service Locator, Command
-  - Abstract Factory, Strategy, Flyweight
-
-> TOOLS: Git, Odin Inspector, DoTween`,
+  Object Pool, Service Locator, Command,
+  Abstract Factory, Strategy, Flyweight,
+  State, Observer, Singleton, Composite,
+  Template Method, Wrapper`,
 
     experience: `> LOADING WORK HISTORY...
 
-> [CURRENT] Mega Cat Studios | Unity Developer
-  (MAR 2025 - PRESENT)
-  - Contributed to gameplay and UI systems on
-    God of War: Sons of Sparta (AAA title)
-  - Implemented and maintained UI features in
-    a production environment
-  - Built reusable UI components and editor
-    tooling to support iteration
-  - Developed scalable UI systems for designers
-    and gameplay features
+> [CURRENT] Mega Cat Studios
+  Unity Developer — Mar 2025 to Present
+  ─────────────────────────────────────
+  Project: God of War: Sons of Sparta (AAA)
+
+  - Contributed to gameplay and UI systems
+    on a PlayStation title
+  - Implemented and maintained UI features
+    in a production environment
+  - Built reusable UI components and custom
+    editor tooling to support designer iteration
+  - Developed scalable UI architecture for
+    gameplay features
   - Collaborated with designers, artists and
     engineers across disciplines
-  - Bug fixing, optimization and performance
-    improvements
+  - Bug fixing, optimization and profiling
 
-> [PREV] Accenture | Full Stack Developer
-  (MAR 2022 - AUG 2023)
-  - Strong software engineering foundation
-  - Architecture, scalable systems, APIs, CI/CD`,
+> [PREV] Accenture
+  Full Stack Developer — Mar 2022 to Aug 2023
+  ─────────────────────────────────────
+  - Software engineering foundation in
+    architecture, scalable systems, APIs, CI/CD
+  - Production experience with enterprise-level
+    codebases and workflows`,
 
     education: `> RETRIEVING ACADEMIC RECORDS...
 
-> [IN PROGRESS] UADE
+> [IN PROGRESS] UADE — Buenos Aires
   Facultad de Ingeniería
   Bachelor's Degree in Game Development
-  Graduating in 2026.
+  Graduating 2026.
 
-> [2020-2023] UBA
+> [2020 - 2023] UBA (FIUBA) — Buenos Aires
   Facultad de Ingeniería
   Bachelor's Degree in System's Analysis
-  (unfinished)`,
+  (unfinished — pivoted to game development)`,
 
     projects: `> ACCESSING PROJECT FILES...
-> [1] God of War: Sons of Sparta — AAA, UI Backend
-> [2] ShadowBound — AI, Decision Trees + FSM
-> [3] Mawasure — RPG, 8 Design Patterns
-> [4] Chronicles of a Pixel — 2D Action, Beta
-> [5] Roguelike Procedural Generator — Algorithms
-> [6] Bears Against Time — C, Academic (FIUBA)
+
+  TIER 1 — HERO PROJECT:
+> [1] God of War: Sons of Sparta
+      AAA | UI Backend | Mega Cat Studios
+
+  TIER 2 — SUPPORT PROJECTS:
+> [2] Mawasure — RPG | 8 Design Patterns
+> [3] ShadowBound — AI | Decision Trees + FSM
+> [4] Chronicles of a Pixel — 2D Action | Beta
+
+  TIER 3 — EXPERIMENTAL:
+> [5] Bears Against Time — C (FIUBA 2020)
+
 > LOADING VISUAL MODULES...
 > READY.`
 };
@@ -105,6 +146,10 @@ function showSection(key) {
     const idx = sectionKeys.indexOf(key);
     if (idx >= 0 && buttons[idx]) buttons[idx].classList.add('active');
 
+    // Scroll to top before typing
+    const consoleScreen = document.querySelector('.console-screen');
+    consoleScreen.scrollTop = 0;
+
     typeWriter(data[key], 0, key);
 }
 
@@ -113,9 +158,6 @@ function typeWriter(text, i, currentKey) {
         output.textContent += text.charAt(i);
         i++;
         typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 4);
-
-        const consoleScreen = document.querySelector('.console-screen');
-        consoleScreen.scrollTop = consoleScreen.scrollHeight;
     } else {
         if (currentKey === 'projects') {
             projectShowcase.style.display = 'block';
@@ -134,11 +176,25 @@ function filterProjects(category) {
     const projects = document.querySelectorAll('.project-card');
     projects.forEach(project => {
         if (category === 'all' || project.classList.contains(category)) {
-            project.style.display = 'flex';
+            project.style.display = project.classList.contains('hero') ? 'grid' : 'flex';
         } else {
             project.style.display = 'none';
         }
     });
+}
+
+function carouselMove(btn, direction) {
+    const carousel = btn.closest('.card-carousel');
+    const imgs = carousel.querySelectorAll('.carousel-img');
+    const dots = carousel.querySelectorAll('.dot');
+
+    let current = [...imgs].findIndex(img => img.classList.contains('active'));
+    imgs[current].classList.remove('active');
+    dots[current].classList.remove('active');
+
+    current = (current + direction + imgs.length) % imgs.length;
+    imgs[current].classList.add('active');
+    dots[current].classList.add('active');
 }
 
 window.onload = () => showSection('about');

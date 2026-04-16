@@ -1,14 +1,43 @@
-/* === Base === */
+/* ================================ */
+/* === DESIGN TOKENS / PALETTE  === */
+/* ================================ */
+:root {
+    --bg-primary: #080808;
+    --bg-surface: #0a0a0a;
+    --bg-card: rgba(0, 25, 0, 0.35);
+
+    /* Green palette — neon for accents, softer for body text */
+    --green-neon: #00ff41;        /* titles, borders, accents */
+    --green-body: #33ff66;        /* body text — reduced halation */
+    --green-muted: #55cc66;       /* secondary info, patterns */
+    --green-dim: #2a8a3e;         /* disabled / inactive */
+    --green-glow: rgba(0, 255, 65, 0.12);
+
+    --white-soft: #ccc;           /* subtitles */
+    --white-muted: #999;          /* tertiary text */
+    --text-inactive: #555;        /* filter buttons off */
+
+    --font-mono: 'Courier New', Courier, monospace;
+}
+
+/* ================================ */
+/* === BASE                     === */
+/* ================================ */
+html {
+    font-size: 16px; /* rem anchor — respects user browser settings */
+}
+
 body {
-    background-color: #050505;
-    color: #00ff41;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--bg-primary);
+    color: var(--green-body);
+    font-family: var(--font-mono);
     margin: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    font-size: 1.05rem;
+    font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+    line-height: 1.6;
 }
 
 /* CRT scanline overlay */
@@ -16,21 +45,23 @@ body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%),
                 linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
     background-size: 100% 3px, 3px 100%;
     z-index: 100;
     pointer-events: none;
 }
 
-/* === Header === */
+/* ================================ */
+/* === HEADER                   === */
+/* ================================ */
 .top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 14px 28px;
-    border-bottom: 1px solid #00ff41;
-    background: #0a0a0a;
+    border-bottom: 1px solid var(--green-neon);
+    background: var(--bg-surface);
     z-index: 10;
     flex-shrink: 0;
 }
@@ -38,9 +69,10 @@ body::before {
 .user-info {
     display: flex;
     align-items: center;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 0.7rem + 0.4vw, 1rem);
     font-weight: bold;
     letter-spacing: 0.5px;
+    color: var(--green-neon);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -49,11 +81,11 @@ body::before {
 .status-dot {
     display: inline-block;
     width: 8px; height: 8px;
-    background: #00ff41;
+    background: var(--green-neon);
     border-radius: 50%;
     margin-right: 10px;
     flex-shrink: 0;
-    box-shadow: 0 0 8px #00ff41;
+    box-shadow: 0 0 8px var(--green-neon);
     animation: blink 1s step-end infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
@@ -65,16 +97,18 @@ body::before {
 }
 
 .social-icons a {
-    color: #00ff41;
+    color: var(--green-neon);
     font-size: 1.2rem;
     text-decoration: none;
     transition: text-shadow 0.2s;
 }
 .social-icons a:hover {
-    text-shadow: 0 0 10px #00ff41;
+    text-shadow: 0 0 10px var(--green-neon);
 }
 
-/* === Terminal Layout === */
+/* ================================ */
+/* === TERMINAL LAYOUT          === */
+/* ================================ */
 .terminal-container {
     display: flex;
     flex: 1;
@@ -83,7 +117,9 @@ body::before {
     overflow: hidden;
 }
 
-/* === Sidebar Nav === */
+/* ================================ */
+/* === SIDEBAR NAV              === */
+/* ================================ */
 .side-nav {
     display: flex;
     flex-direction: column;
@@ -94,46 +130,52 @@ body::before {
 
 .nav-btn {
     background: none;
-    border: 1px solid #00ff41;
-    color: #00ff41;
+    border: 1px solid var(--green-neon);
+    color: var(--green-neon);
     padding: 10px 14px;
     cursor: pointer;
     text-align: left;
     transition: all 0.2s;
     font-family: inherit;
     font-weight: bold;
-    font-size: 0.92rem;
+    font-size: clamp(0.78rem, 0.72rem + 0.25vw, 0.92rem);
 }
 
 .nav-btn:hover,
 .nav-btn.active {
-    background: #00ff41;
-    color: #050505;
+    background: var(--green-neon);
+    color: var(--bg-primary);
 }
 
-/* === Console Screen === */
+/* ================================ */
+/* === CONSOLE SCREEN           === */
+/* ================================ */
 .console-screen {
     flex: 1;
-    background: rgba(0, 20, 0, 0.2);
-    border: 1px solid #00ff41;
-    padding: 24px;
+    background: rgba(0, 20, 0, 0.15);
+    border: 1px solid var(--green-neon);
+    padding: 28px;
     overflow-y: auto;
     position: relative;
-    box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+    box-shadow: inset 0 0 20px var(--green-glow);
 }
 
 #console-output {
-    margin-bottom: 18px;
-    line-height: 1.8;
+    margin-bottom: 20px;
+    line-height: 1.7;
     white-space: pre-wrap;
-    font-size: 1rem;
+    font-size: clamp(0.88rem, 0.84rem + 0.2vw, 1.02rem);
     letter-spacing: 0.3px;
+    max-width: 75ch;
+    color: var(--green-body);
 }
 
-/* === Project Filters === */
+/* ================================ */
+/* === PROJECT FILTERS          === */
+/* ================================ */
 .filter-section {
-    margin-bottom: 18px;
-    border-left: 3px solid #00ff41;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--green-neon);
     padding-left: 14px;
     display: flex;
     flex-wrap: wrap;
@@ -143,51 +185,78 @@ body::before {
 
 .filter-label {
     margin-right: 10px;
-    font-size: 0.92rem;
+    font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
+    color: var(--green-neon);
 }
 
 .filter-btn {
     background: none;
     border: none;
-    color: #555;
+    color: var(--text-inactive);
     font-family: inherit;
-    font-size: 0.92rem;
+    font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
     cursor: pointer;
     transition: all 0.3s;
     padding: 5px 10px;
 }
 
 .filter-btn:hover, .filter-btn.active {
-    color: #00ff41;
-    text-shadow: 0 0 5px #00ff41;
+    color: var(--green-neon);
+    text-shadow: 0 0 5px var(--green-neon);
 }
 
-/* === Project Grid === */
+/* ================================ */
+/* === PROJECT GRID             === */
+/* ================================ */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 18px;
 }
 
+/* === Hero card (full width) === */
+.project-card.hero {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+}
+
+.project-card.hero .card-header {
+    grid-column: 1 / -1;
+}
+
+.project-card.hero .card-img {
+    height: 100%;
+    min-height: 200px;
+    border-bottom: none;
+    border-right: 1px solid var(--green-neon);
+}
+
+.project-card.hero .card-content {
+    padding: 20px;
+}
+
+/* === Standard cards === */
 .project-card {
-    border: 1px solid #00ff41;
-    background-color: rgba(0, 25, 0, 0.4);
+    border: 1px solid var(--green-neon);
+    background-color: var(--bg-card);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
-    transition: box-shadow 0.2s;
+    box-shadow: 0 0 10px var(--green-glow);
+    transition: box-shadow 0.3s;
 }
 
 .project-card:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.25);
+    box-shadow: 0 0 24px rgba(0, 255, 65, 0.3);
 }
 
 .card-header {
-    background-color: #00ff41;
-    color: #0a0a0a;
+    background-color: var(--green-neon);
+    color: var(--bg-surface);
     padding: 6px 14px;
     font-weight: bold;
-    font-size: 0.88rem;
+    font-size: clamp(0.72rem, 0.68rem + 0.2vw, 0.85rem);
 }
 
 .card-img {
@@ -195,7 +264,7 @@ body::before {
     height: 170px;
     object-fit: cover;
     display: block;
-    border-bottom: 1px solid #00ff41;
+    border-bottom: 1px solid var(--green-neon);
     filter: saturate(0.7) brightness(0.85);
     transition: filter 0.3s;
 }
@@ -204,35 +273,142 @@ body::before {
     filter: saturate(1) brightness(1);
 }
 
+/* ================================ */
+/* === CAROUSEL                 === */
+/* ================================ */
+.card-carousel {
+    position: relative;
+    overflow: hidden;
+    height: 170px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--green-neon);
+}
+
+.carousel-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    filter: saturate(0.7) brightness(0.85);
+}
+
+.carousel-img.active {
+    opacity: 1;
+}
+
+.project-card:hover .carousel-img.active {
+    filter: saturate(1) brightness(1);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid var(--green-neon);
+    color: var(--green-neon);
+    font-size: 1.6rem;
+    line-height: 1;
+    padding: 4px 10px 6px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, background 0.2s;
+    z-index: 2;
+    font-family: inherit;
+}
+
+.carousel-btn.prev { left: 6px; }
+.carousel-btn.next { right: 6px; }
+
+.card-carousel:hover .carousel-btn {
+    opacity: 1;
+}
+
+.carousel-btn:hover {
+    background: var(--green-neon);
+    color: var(--bg-surface);
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(0, 255, 65, 0.35);
+    border: 1px solid var(--green-neon);
+    transition: background 0.2s;
+}
+
+.dot.active {
+    background: var(--green-neon);
+}
+
+/* ================================ */
+/* === CARD CONTENT             === */
+/* ================================ */
 .card-content {
     padding: 16px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    font-size: 0.92rem;
+    font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
     line-height: 1.6;
 }
 
 .card-content h3 {
-    margin: 0 0 6px 0;
-    font-size: 1.15rem;
-    color: #00ff41;
+    margin: 0 0 4px 0;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.18rem);
+    color: var(--green-neon);
+}
+
+.card-tier {
+    display: inline-block;
+    font-size: 0.68rem;
+    color: var(--bg-surface);
+    background: var(--green-neon);
+    padding: 1px 8px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    width: fit-content;
 }
 
 .card-content .card-subtitle {
-    color: #ccc;
+    color: var(--white-soft);
     margin: 0 0 10px 0;
-    font-size: 0.88rem;
+    font-size: clamp(0.78rem, 0.74rem + 0.2vw, 0.88rem);
 }
 
 .card-content p {
     margin: 0 0 8px 0;
-    color: #00ff41;
+    color: var(--green-body);
+}
+
+.card-content .card-contribution {
+    color: var(--white-soft);
+    font-size: clamp(0.76rem, 0.72rem + 0.2vw, 0.85rem);
+    border-left: 2px solid var(--green-muted);
+    padding-left: 10px;
+    margin: 6px 0 10px 0;
+    line-height: 1.5;
 }
 
 .card-patterns {
-    font-size: 0.78rem;
-    color: #66cc77;
+    font-size: clamp(0.7rem, 0.66rem + 0.2vw, 0.8rem);
+    color: var(--green-muted);
     font-style: italic;
     margin-top: 4px;
 }
@@ -248,31 +424,35 @@ body::before {
     flex: 1;
 }
 
-/* === Buttons === */
+/* ================================ */
+/* === BUTTONS                  === */
+/* ================================ */
 .download-btn {
     display: inline-block;
     margin-top: 15px;
     padding: 8px 14px;
     background-color: transparent;
-    color: #00ff41;
-    border: 1px dashed #00ff41;
+    color: var(--green-neon);
+    border: 1px dashed var(--green-neon);
     text-align: center;
     text-decoration: none;
     transition: all 0.2s;
-    font-size: 0.88rem;
+    font-size: clamp(0.76rem, 0.72rem + 0.2vw, 0.88rem);
     font-family: inherit;
 }
 
 .download-btn:hover {
-    background-color: #00ff41;
-    color: #0a0a0a;
+    background-color: var(--green-neon);
+    color: var(--bg-surface);
 }
 
-/* === WebGL Container === */
+/* ================================ */
+/* === WEBGL CONTAINER          === */
+/* ================================ */
 .webgl-container {
     width: 100%;
     aspect-ratio: 16/9;
-    border: 1px dotted #00ff41;
+    border: 1px dotted var(--green-neon);
     margin-top: 10px;
 }
 
@@ -281,23 +461,53 @@ body::before {
     height: 100%;
 }
 
-/* === Scrollbar === */
+/* ================================ */
+/* === FOOTER                   === */
+/* ================================ */
+.site-footer {
+    border-top: 1px solid var(--green-neon);
+    background: var(--bg-surface);
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: clamp(0.7rem, 0.66rem + 0.2vw, 0.78rem);
+    color: var(--green-muted);
+}
+
+.footer-links {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-links a {
+    color: var(--green-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--green-neon);
+}
+
+/* ================================ */
+/* === SCROLLBAR                === */
+/* ================================ */
 .console-screen::-webkit-scrollbar {
     width: 6px;
 }
 .console-screen::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: var(--bg-surface);
 }
 .console-screen::-webkit-scrollbar-thumb {
-    background: #00ff41;
+    background: var(--green-neon);
     border-radius: 3px;
 }
 
-/* ====================== */
-/* === RESPONSIVE      === */
-/* ====================== */
-
-/* Tablet */
+/* ================================ */
+/* === RESPONSIVE — TABLET      === */
+/* ================================ */
 @media (max-width: 768px) {
     body {
         overflow: auto;
@@ -307,14 +517,6 @@ body::before {
 
     .top-nav {
         padding: 10px 16px;
-    }
-
-    .user-info {
-        font-size: 0.78rem;
-    }
-
-    .social-icons a {
-        font-size: 1.05rem;
     }
 
     .terminal-container {
@@ -335,46 +537,53 @@ body::before {
 
     .nav-btn {
         white-space: nowrap;
-        padding: 8px 12px;
-        font-size: 0.8rem;
         flex-shrink: 0;
     }
 
     .console-screen {
-        padding: 16px;
+        padding: 18px;
         overflow-y: visible;
         min-height: 300px;
-    }
-
-    #console-output {
-        font-size: 0.88rem;
     }
 
     .project-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Hero card stacks on tablet */
+    .project-card.hero {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card.hero .card-img {
+        height: 200px;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--green-neon);
+    }
+
     .card-img {
         height: 180px;
     }
+
+    .site-footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        padding: 12px 16px;
+    }
 }
 
-/* Mobile */
+/* ================================ */
+/* === RESPONSIVE — MOBILE      === */
+/* ================================ */
 @media (max-width: 480px) {
     .top-nav {
         padding: 8px 12px;
     }
 
-    .user-info {
-        font-size: 0.68rem;
-    }
-
     .social-icons {
         gap: 14px;
-    }
-
-    .social-icons a {
-        font-size: 0.95rem;
     }
 
     .terminal-container {
@@ -386,48 +595,15 @@ body::before {
         gap: 4px;
     }
 
-    .nav-btn {
-        padding: 7px 10px;
-        font-size: 0.72rem;
-    }
-
     .console-screen {
         padding: 12px;
-    }
-
-    #console-output {
-        font-size: 0.82rem;
-        line-height: 1.7;
-    }
-
-    .filter-section {
-        flex-wrap: wrap;
-        gap: 2px;
-    }
-
-    .filter-btn {
-        font-size: 0.78rem;
-        padding: 4px 6px;
-    }
-
-    .card-content {
-        font-size: 0.82rem;
-    }
-
-    .card-content h3 {
-        font-size: 1rem;
-    }
-
-    .card-header {
-        font-size: 0.75rem;
     }
 
     .card-img {
         height: 150px;
     }
 
-    .download-btn {
-        font-size: 0.78rem;
-        padding: 7px 12px;
+    .site-footer {
+        padding: 10px 12px;
     }
 }

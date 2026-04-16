@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mauro N. Uriarte — Unity UI/Gameplay Programmer. Portfolio showcasing professional and personal game development projects.">
+    <meta name="description" content="Mauro N. Uriarte — Unity UI/Gameplay Programmer specializing in scalable architecture, modular systems, and production-ready code. C#, Unity, Design Patterns.">
     <meta property="og:title" content="Mauro N. Uriarte | Unity UI/Gameplay Programmer">
-    <meta property="og:description" content="Portfolio showcasing professional and personal game development projects.">
+    <meta property="og:description" content="Portfolio: God of War: Sons of Sparta (AAA), modular RPG systems, AI architecture, and editor tooling.">
     <meta property="og:type" content="website">
-    <title>Mauro N. Uriarte | Dev Dashboard</title>
+    <title>Mauro N. Uriarte | Unity UI/Gameplay Programmer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -44,31 +44,70 @@
                     <button class="filter-btn active" onclick="filterProjects('all')">[ All ]</button>
                     <button class="filter-btn" onclick="filterProjects('professional')">[ Professional ]</button>
                     <button class="filter-btn" onclick="filterProjects('personal')">[ Personal ]</button>
-                    <button class="filter-btn" onclick="filterProjects('webgl')">[ WebGL / Web ]</button>
                     <button class="filter-btn" onclick="filterProjects('pc')">[ PC (.exe) ]</button>
                 </section>
 
                 <section class="project-grid">
 
-                    <article class="project-card professional">
-                        <div class="card-header">sys.run("GodOfWar_UI.exe")</div>
-                        <img class="card-img" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta">
+                    <!-- TIER 1: Hero Project — AAA -->
+                    <article class="project-card professional hero">
+                        <div class="card-header">// TIER_1: HERO_PROJECT — AAA PRODUCTION</div>
+                        <img class="card-img" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta — AAA title by Mega Cat Studios">
                         <div class="card-content">
                             <h3>God of War: Sons of Sparta</h3>
-                            <p class="card-subtitle"><strong>Mega Cat Studios</strong> | UI Backend Developer</p>
-                            <p>Contributed to gameplay and UI systems on this AAA title. Built reusable UI components, editor tooling, and scalable systems for designers. Worked within production pipelines collaborating across disciplines.</p>
+                            <p class="card-subtitle"><strong>Mega Cat Studios</strong> | Unity Developer (Mar 2025 - Present)</p>
+                            <p>AAA production title for PlayStation. Contributed to gameplay and UI systems in a large-scale production environment with cross-discipline teams.</p>
+                            <p class="card-contribution">My contribution: Implemented and maintained UI features, built reusable UI components and custom editor tooling for designers, developed scalable UI architecture, and performed bug fixing, optimization, and profiling.</p>
                             <a href="https://store.playstation.com/en-us/concept/10012744/" target="_blank" class="download-btn" style="margin-top: auto;">
-                                <i class="fab fa-playstation"></i> PS Store
+                                <i class="fab fa-playstation"></i> PlayStation Store
                             </a>
                         </div>
                     </article>
 
+                    <!-- TIER 2: Support Projects -->
                     <article class="project-card personal pc">
-                        <div class="card-header">sys.run("ShadowBound.exe")</div>
+                        <div class="card-header">// TIER_2: sys.run("Mawasure_RPG.exe")</div>
+                        <img class="card-img" src="img/mawasure.jpg" alt="Mawasure — 3D RPG Prototype">
+                        <div class="card-content">
+                            <h3>Mawasure</h3>
+                            <span class="card-tier">8 DESIGN PATTERNS</span>
+                            <p class="card-subtitle"><strong>3D RPG Prototype — Unity</strong></p>
+                            <p>RPG where players design combat strategies through a modular spell system (single, multi, AOE, chain cast) built with ScriptableObjects + custom editor. Strategic combat based on casting times, ranges and spell synergies. Dynamic spell customization UI and state-based enemy AI.</p>
+                            <p class="card-patterns">Object Pool, Service Locator, Flyweight, Command, Abstract Factory, State Machine, Strategy, Wrapper.</p>
+                            <div class="card-links">
+                                <a href="https://mauronu.itch.io/mawasure" target="_blank" class="download-btn">
+                                    <i class="fas fa-gamepad"></i> Play on Itch.io
+                                </a>
+                                <a href="https://github.com/MauroUr/Mawasure" target="_blank" class="download-btn">
+                                    <i class="fab fa-github"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal pc">
+                        <div class="card-header">// TIER_2: sys.run("ShadowBound.exe")</div>
+                        <div class="card-carousel">
+                            <img class="carousel-img active" src="img/Shadowbound/mainmenu.png" alt="ShadowBound — Main Menu">
+                            <img class="carousel-img" src="img/Shadowbound/batalla.png" alt="ShadowBound — Combat">
+                            <img class="carousel-img" src="img/Shadowbound/construction.png" alt="ShadowBound — Construction">
+                            <button class="carousel-btn prev" onclick="carouselMove(this, -1)">&#8249;</button>
+                            <button class="carousel-btn next" onclick="carouselMove(this, 1)">&#8250;</button>
+                            <div class="carousel-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
                         <div class="card-content">
                             <h3>ShadowBound</h3>
-                            <p class="card-subtitle"><strong>Dungeon-Management Action/Strategy (Unity)</strong></p>
-                            <p>Led enemy AI development using custom Decision Trees + FSM architecture. Implemented third-person player controller and global event-driven systems for game-wide communication.</p>
+                            <span class="card-tier">AI + GAMEPLAY ARCHITECTURE</span>
+                            <p class="card-subtitle"><strong>Dungeon-Management Action/Strategy — Unity (Team Project)</strong></p>
+                            <p>Hybrid AI system where a visual Decision Tree drives FSM state transitions. 7 FSM states (Attack, Block, Evade, Measure, Pursue, Heal, Idle) resolved at runtime via reflection. Custom DT nodes with hysteresis, weighted probability, and distance-proportional randomization for emergent behavior.</p>
+                            <p>Full flocking system (Craig Reynolds) with role-specific extensions: MeleeEncircle for formation-based surrounding, RangedSpread with 8-direction scoring for tactical repositioning. Steering behaviors: Seek, Pursuit, Evade, ObstacleAvoidance.</p>
+                            <p>Third-person player controller with combo attack system, parry window (0.2s) with counter-attacks, lock-on targeting (Cinemachine integration), 3 skill slots with cooldowns, and a charge ultimate with physics-based pushback.</p>
+                            <p class="card-contribution">My contribution: Full ownership of AI architecture (Decision Trees + FSM + flocking), player controller, event bus system, custom FSM Editor Window, and TypeSelector property drawer. The AI system was designed to be fully editable by game designers through ScriptableObjects and visual editors.</p>
+                            <p class="card-patterns">State, Strategy, Observer, Service Locator, Singleton, Command, Composite, Template Method, Data-Driven Design.</p>
                             <a href="https://mauronu.itch.io" target="_blank" class="download-btn" style="margin-top: auto;">
                                 <i class="fas fa-gamepad"></i> Itch.io
                             </a>
@@ -76,48 +115,32 @@
                     </article>
 
                     <article class="project-card personal pc">
-                        <div class="card-header">sys.run("Mawasure_RPG.exe")</div>
-                        <img class="card-img" src="img/mawasure.jpg" alt="Mawasure RPG">
-                        <div class="card-content">
-                            <h3>Mawasure</h3>
-                            <p class="card-subtitle"><strong>RPG — Unity</strong></p>
-                            <p>RPG where players design combat strategies through a modular spell system (single cast, multi-cast, AOE, chain cast) built with ScriptableObjects + custom editor. Features strategic combat based on casting times, ranges and spell synergies, UI for dynamic spell customization, and state-based enemy AI.</p>
-                            <p class="card-patterns">Patterns: Object Pool, Service Locator, Flyweight, Command, Abstract Factory, State Machine, Strategy, Wrapper.</p>
-                            <div class="card-links">
-                                <a href="https://mauronu.itch.io/mawasure" target="_blank" class="download-btn">
-                                    <i class="fas fa-gamepad"></i> Play on Itch.io
-                                </a>
-                                <a href="https://github.com/MauroUr/Mawasure" target="_blank" class="download-btn">
-                                    <i class="fab fa-github"></i> View Repo
-                                </a>
+                        <div class="card-header">// TIER_2: sys.run("ChroniclesOfAPixel.exe")</div>
+                        <div class="card-carousel">
+                            <img class="carousel-img active" src="img/chronicles/mainmenu.png" alt="Chronicles of a Pixel — Main Menu">
+                            <img class="carousel-img" src="img/chronicles/gameplaylvl1.png" alt="Chronicles of a Pixel — Gameplay Level 1">
+                            <button class="carousel-btn prev" onclick="carouselMove(this, -1)">&#8249;</button>
+                            <button class="carousel-btn next" onclick="carouselMove(this, 1)">&#8250;</button>
+                            <div class="carousel-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
                             </div>
                         </div>
-                    </article>
-
-                    <article class="project-card personal pc">
-                        <div class="card-header">sys.run("ChroniclesOfAPixel.exe")</div>
                         <div class="card-content">
                             <h3>Chronicles of a Pixel</h3>
-                            <p class="card-subtitle"><strong>2D Action/Skill Game — Unity (Beta)</strong></p>
-                            <p>Action game where you dodge enemies and obstacles while keeping the planet's life above 80% for 30 seconds. 3 complete levels with evolving pixel-collection mechanics, cursor-driven ship movement, nitro boost, and teleportation ability. All programming by me, artwork by Mart&iacute;n Morbelli.</p>
+                            <p class="card-subtitle"><strong>2D Action Mobile Game — Unity (Beta)</strong></p>
+                            <p>Mobile action game with 5 distinct enemy types (homing meteorites, lasers, bombers with mines, black hole gravity wells), dynamic difficulty scaling (spawn rates halve when planet recovers), and a color-matching collection mechanic across 3 mechanically distinct levels. Built with floating joystick, Android haptics, and Google Play integration.</p>
+                            <p class="card-contribution">My contribution: All gameplay programming — 5 enemy behaviors, spawner with dynamic difficulty, player controller (nitro, teleport, color matching), level progression, save system, and audio management. Art by Mart&iacute;n Morbelli.</p>
                         </div>
                     </article>
 
+                    <!-- TIER 3: Experimental / Academic -->
                     <article class="project-card personal pc">
-                        <div class="card-header">sys.run("Roguelike_Gen.exe")</div>
-                        <div class="card-content">
-                            <h3>Roguelike Procedural Generator</h3>
-                            <p class="card-subtitle"><strong>Procedural Dungeon Tool (C#)</strong></p>
-                            <p>Worm-based dungeon generation algorithm. Produces randomized, connected dungeon layouts for roguelike games.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card personal pc">
-                        <div class="card-header">sys.run("BearsAgainstTime.exe")</div>
+                        <div class="card-header">// TIER_3: sys.run("BearsAgainstTime.exe")</div>
                         <div class="card-content">
                             <h3>Bears Against Time</h3>
-                            <p class="card-subtitle"><strong>Console Adventure Game — C (Academic, FIUBA 2020)</strong></p>
-                            <p>A "We Bare Bears"-inspired rescue game built entirely in C for my first Algorithms course at UBA. Each bear has unique abilities and stats (Polar jumps rocks + extra candles, Grizzly handles trees faster + longer flashlight, Panda has GPS + flares). Navigate a dark forest avoiding koalas and obstacles before time runs out.</p>
+                            <p class="card-subtitle"><strong>Console Adventure Game — C (FIUBA, 2020)</strong></p>
+                            <p>A "We Bare Bears"-inspired rescue game built entirely in C for my first Algorithms course at UBA. 3 playable bears with unique abilities (rock jumping, faster navigation, GPS tracking). Procedural map with resource management and time pressure.</p>
                         </div>
                     </article>
 
@@ -126,6 +149,15 @@
             </div>
         </section>
     </main>
+
+    <footer class="site-footer">
+        <span>mauronuriarte@gmail.com — Buenos Aires, Argentina</span>
+        <div class="footer-links">
+            <a href="https://github.com/MauroUr" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/mauronu/" target="_blank">LinkedIn</a>
+            <a href="https://mauronu.itch.io" target="_blank">Itch.io</a>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
