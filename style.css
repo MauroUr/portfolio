@@ -205,13 +205,24 @@ body::before {
     text-shadow: 0 0 5px var(--green-neon);
 }
 
+/* Contrast fix: inactive filters must pass WCAG AA on dark bg */
+.filter-btn { color: #777; }
+
 /* ================================ */
 /* === PROJECT GRID             === */
 /* ================================ */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+/* Progressive fallback: fewer cols on narrower viewports */
+@media (max-width: 1400px) {
+    .project-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1050px) {
+    .project-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* === Hero card (full width) === */
@@ -304,9 +315,17 @@ body::before {
     filter: saturate(1) brightness(1);
 }
 
+.carousel-click-zone {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    cursor: zoom-in;
+}
+
 .carousel-btn {
     position: absolute;
     top: 50%;
+    z-index: 3;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.65);
     border: 1px solid var(--green-neon);
@@ -338,6 +357,7 @@ body::before {
     bottom: 7px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 3;
     display: flex;
     gap: 6px;
     z-index: 2;
@@ -360,7 +380,7 @@ body::before {
 /* === CARD CONTENT             === */
 /* ================================ */
 .card-content {
-    padding: 16px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -395,6 +415,44 @@ body::before {
 .card-content p {
     margin: 0 0 8px 0;
     color: var(--green-body);
+}
+
+.lead-quote {
+    margin: 10px 0 12px 0;
+    padding: 10px 14px;
+    border-left: 2px solid var(--green-neon);
+    background: rgba(0, 255, 65, 0.04);
+    font-size: clamp(0.74rem, 0.70rem + 0.2vw, 0.84rem);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.lead-quote p {
+    color: var(--white-soft) !important;
+    margin: 0 0 6px 0 !important;
+}
+
+.lead-quote p:last-of-type {
+    margin-bottom: 8px !important;
+    color: var(--green-body) !important;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.lead-quote footer {
+    font-style: normal;
+    font-size: 0.72rem;
+    color: var(--green-muted);
+    letter-spacing: 0.3px;
+}
+
+.lead-quote footer a {
+    color: var(--green-neon);
+    text-decoration: none;
+}
+
+.lead-quote footer a:hover {
+    text-decoration: underline;
 }
 
 .card-content .card-contribution {
@@ -492,6 +550,380 @@ body::before {
 }
 
 /* ================================ */
+/* === SKIP LINK (accessibility) === */
+/* ================================ */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background: var(--green-neon);
+    color: var(--bg-surface);
+    padding: 8px 16px;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    font-size: 0.9rem;
+    z-index: 9999;
+    text-decoration: none;
+    transition: top 0.1s;
+}
+.skip-link:focus {
+    top: 0;
+}
+
+/* ================================ */
+/* === FOCUS STYLES (keyboard nav) = */
+/* ================================ */
+:focus-visible {
+    outline: 2px solid var(--green-neon);
+    outline-offset: 3px;
+}
+
+/* Remove default outline only when focus-visible is supported */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ================================ */
+/* === TECHNICAL CHALLENGES     === */
+/* ================================ */
+.card-challenges {
+    margin-top: 10px;
+    border-left: 2px solid var(--green-dim);
+    padding-left: 10px;
+}
+
+.card-challenges summary {
+    color: var(--green-muted);
+    font-size: clamp(0.7rem, 0.66rem + 0.2vw, 0.78rem);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    transition: color 0.2s;
+}
+
+.card-challenges summary::-webkit-details-marker { display: none; }
+
+.card-challenges summary::before {
+    content: '▶';
+    font-size: 0.6rem;
+    transition: transform 0.2s;
+}
+
+.card-challenges[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.card-challenges summary:hover {
+    color: var(--green-neon);
+}
+
+.challenge-item {
+    font-size: clamp(0.7rem, 0.66rem + 0.15vw, 0.78rem);
+    line-height: 1.55;
+    color: var(--green-body);
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 255, 65, 0.08);
+}
+
+.challenge-item:first-of-type {
+    border-top: none;
+    margin-top: 6px;
+}
+
+.ch-label {
+    display: inline-block;
+    color: var(--green-neon);
+    font-size: 0.65rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: rgba(0, 255, 65, 0.08);
+    padding: 1px 6px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+}
+
+.challenge-item code {
+    font-family: var(--font-mono);
+    color: var(--green-neon);
+    font-size: 0.9em;
+    background: rgba(0, 255, 65, 0.06);
+    padding: 0 3px;
+}
+
+/* ================================ */
+/* === ZOOMABLE IMAGES          === */
+/* ================================ */
+.card-img.zoomable {
+    cursor: zoom-in;
+}
+
+.card-img.zoomable:hover {
+    filter: saturate(1) brightness(1.1);
+}
+
+/* Zoom hint badge shown on carousel hover */
+.carousel-zoom-hint {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 0.62rem;
+    color: var(--green-neon);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--green-dim);
+    padding: 3px 7px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    font-family: var(--font-mono);
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.card-carousel:hover .carousel-zoom-hint {
+    opacity: 1;
+}
+
+/* ================================ */
+/* === ARCHITECTURE DIAGRAM     === */
+/* ================================ */
+.arch-diagram {
+    margin: 12px 0;
+    border: 1px solid var(--green-dim);
+    border-radius: 3px;
+    overflow: hidden;
+    background: #050505;
+}
+
+.arch-diagram-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    cursor: zoom-in;
+    position: relative;
+    font-family: var(--font-mono);
+}
+
+.arch-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.2s;
+}
+
+.arch-diagram-trigger:hover .arch-img,
+.arch-diagram-trigger:focus-visible .arch-img {
+    filter: brightness(1.15);
+}
+
+.arch-diagram-trigger:focus-visible {
+    outline: 2px solid var(--green-neon);
+    outline-offset: 2px;
+}
+
+.arch-zoom-hint {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 0.62rem;
+    color: var(--green-neon);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--green-dim);
+    padding: 3px 7px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.arch-diagram-trigger:hover .arch-zoom-hint,
+.arch-diagram-trigger:focus-visible .arch-zoom-hint {
+    opacity: 1;
+}
+
+.arch-diagram figcaption {
+    font-size: clamp(0.62rem, 0.58rem + 0.2vw, 0.72rem);
+    color: var(--green-dim);
+    text-align: center;
+    padding: 4px 8px;
+    border-top: 1px solid rgba(42, 138, 62, 0.3);
+    letter-spacing: 1px;
+}
+
+/* ================================ */
+/* === DIAGRAM MODAL (LIGHTBOX) === */
+/* ================================ */
+.diagram-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.diagram-modal[hidden] { display: none; }
+
+.diagram-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    cursor: zoom-out;
+}
+
+.diagram-modal-content {
+    position: relative;
+    background: var(--bg-surface);
+    border: 1px solid var(--green-neon);
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.25), inset 0 0 0 1px rgba(0, 255, 65, 0.1);
+    max-width: min(96vw, 1300px);
+    max-height: 94vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: modal-in 0.2s ease-out;
+}
+
+.diagram-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--green-dim);
+    background: rgba(0, 255, 65, 0.06);
+    flex-shrink: 0;
+}
+
+.diagram-modal-header #diagram-modal-title {
+    color: var(--green-neon);
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 0.68rem + 0.25vw, 0.9rem);
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    text-shadow: 0 0 6px rgba(0, 255, 65, 0.35);
+}
+
+.diagram-modal-close {
+    background: transparent;
+    border: 1px solid var(--green-dim);
+    color: var(--green-body);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+}
+
+.diagram-modal-close:hover,
+.diagram-modal-close:focus-visible {
+    background: var(--green-neon);
+    color: #000;
+    border-color: var(--green-neon);
+    outline: none;
+    box-shadow: 0 0 12px rgba(0, 255, 65, 0.5);
+}
+
+.diagram-modal-body {
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #050505;
+}
+
+/* Photos: centered, fit within modal */
+.diagram-modal-body img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+/* SVG diagram: fill full modal width, scroll vertically if needed */
+.modal--diagram .diagram-modal-content {
+    max-width: min(98vw, 1600px);
+    max-height: 96vh;
+}
+
+.modal--diagram .diagram-modal-body {
+    display: block;
+    overflow: auto;
+}
+
+.modal--diagram .diagram-modal-body img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    min-width: 700px;
+}
+
+.diagram-modal-hint {
+    padding: 6px 16px;
+    border-top: 1px solid rgba(42, 138, 62, 0.4);
+    background: rgba(0, 255, 65, 0.03);
+    color: var(--green-dim);
+    font-size: 0.65rem;
+    text-align: center;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+@keyframes modal-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* ================================ */
+/* === REDUCED MOTION           === */
+/* ================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    /* Instant typewriter — show all text immediately */
+    #console-output {
+        transition: none;
+    }
+
+    .status-dot {
+        animation: none;
+        opacity: 1;
+    }
+
+    .carousel-img {
+        transition: none;
+    }
+
+    .diagram-modal-content {
+        animation: none;
+    }
+}
+
+/* ================================ */
 /* === SCROLLBAR                === */
 /* ================================ */
 .console-screen::-webkit-scrollbar {
@@ -507,6 +939,7 @@ body::before {
 
 /* ================================ */
 /* === RESPONSIVE — TABLET      === */
+/* === (≤768px)                 === */
 /* ================================ */
 @media (max-width: 768px) {
     body {
@@ -546,11 +979,11 @@ body::before {
         min-height: 300px;
     }
 
+    /* 1 col on tablet (hero already spans full width) */
     .project-grid {
         grid-template-columns: 1fr;
     }
 
-    /* Hero card stacks on tablet */
     .project-card.hero {
         grid-template-columns: 1fr;
     }
@@ -566,6 +999,21 @@ body::before {
         height: 180px;
     }
 
+    /* Lead quote more compact on tablet */
+    .lead-quote {
+        padding: 8px 12px;
+    }
+
+    /* Modal: near fullscreen on tablet */
+    .diagram-modal {
+        padding: 10px;
+    }
+
+    .diagram-modal-content {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
     .site-footer {
         flex-direction: column;
         gap: 8px;
@@ -576,16 +1024,39 @@ body::before {
 
 /* ================================ */
 /* === RESPONSIVE — MOBILE      === */
+/* === (≤520px) header wrap     === */
 /* ================================ */
-@media (max-width: 480px) {
+@media (max-width: 520px) {
+    /* Stack header: name on top, icons below */
     .top-nav {
-        padding: 8px 12px;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+    }
+
+    .user-info {
+        font-size: clamp(0.68rem, 0.6rem + 1.5vw, 0.82rem);
+        justify-content: center;
+        text-align: center;
     }
 
     .social-icons {
-        gap: 14px;
+        gap: 20px;
     }
 
+    /* Side nav: slightly smaller buttons */
+    .nav-btn {
+        font-size: 0.72rem;
+        padding: 6px 8px;
+    }
+}
+
+/* ================================ */
+/* === RESPONSIVE — MOBILE      === */
+/* === (≤480px)                 === */
+/* ================================ */
+@media (max-width: 480px) {
     .terminal-container {
         padding: 8px;
         gap: 8px;
@@ -601,6 +1072,35 @@ body::before {
 
     .card-img {
         height: 150px;
+    }
+
+    .card-carousel {
+        height: 150px;
+    }
+
+    /* Filter buttons: smaller on mobile */
+    .filter-btn {
+        font-size: 0.72rem;
+        padding: 4px 7px;
+    }
+
+    /* Arch diagram hint hidden on touch (no hover) */
+    .arch-zoom-hint,
+    .carousel-zoom-hint {
+        display: none;
+    }
+
+    /* Modal full bleed on small phones */
+    .diagram-modal {
+        padding: 6px;
+    }
+
+    .diagram-modal-header {
+        padding: 8px 12px;
+    }
+
+    .diagram-modal-body {
+        padding: 10px;
     }
 
     .site-footer {

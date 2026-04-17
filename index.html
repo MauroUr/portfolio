@@ -13,28 +13,30 @@
 </head>
 <body>
 
-    <header class="top-nav">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="top-nav" role="banner">
         <div class="user-info">
             <span class="status-dot"></span> MAURO N. URIARTE // UNITY_UI_GAMEPLAY_DEV
         </div>
         <div class="social-icons">
-            <a href="mailto:mauronuriarte@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/MauroUr" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/mauronu/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://mauronu.itch.io" target="_blank" title="Itch.io"><i class="fab fa-itch-io"></i></a>
+            <a href="mailto:mauronuriarte@gmail.com" title="Email" aria-label="Send email to Mauro"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+            <a href="https://github.com/MauroUr" target="_blank" title="GitHub" aria-label="GitHub profile (opens in new tab)"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/mauronu/" target="_blank" title="LinkedIn" aria-label="LinkedIn profile (opens in new tab)"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://mauronu.itch.io" target="_blank" title="Itch.io" aria-label="Itch.io profile (opens in new tab)"><i class="fab fa-itch-io" aria-hidden="true"></i></a>
         </div>
     </header>
 
-    <main class="terminal-container">
-        <nav class="side-nav">
-            <button class="nav-btn active" onclick="showSection('about')">[ ABOUT_ME ]</button>
-            <button class="nav-btn" onclick="showSection('skills')">[ SKILLS ]</button>
-            <button class="nav-btn" onclick="showSection('experience')">[ EXPERIENCE ]</button>
-            <button class="nav-btn" onclick="showSection('education')">[ EDUCATION ]</button>
-            <button class="nav-btn" onclick="showSection('projects')">[ PROJECTS ]</button>
+    <main class="terminal-container" id="main-content" role="main">
+        <nav class="side-nav" aria-label="Portfolio sections">
+            <button class="nav-btn active" onclick="showSection('about')" aria-pressed="true">[ ABOUT_ME ]</button>
+            <button class="nav-btn" onclick="showSection('projects')" aria-pressed="false">[ PROJECTS ]</button>
+            <button class="nav-btn" onclick="showSection('skills')" aria-pressed="false">[ SKILLS ]</button>
+            <button class="nav-btn" onclick="showSection('experience')" aria-pressed="false">[ EXPERIENCE ]</button>
+            <button class="nav-btn" onclick="showSection('education')" aria-pressed="false">[ EDUCATION ]</button>
         </nav>
 
-        <section class="console-screen">
+        <section class="console-screen" aria-live="polite" aria-label="Portfolio content">
             <div id="console-output"></div>
 
             <div id="project-showcase" style="display: none;">
@@ -45,19 +47,26 @@
                     <button class="filter-btn" onclick="filterProjects('professional')">[ Professional ]</button>
                     <button class="filter-btn" onclick="filterProjects('personal')">[ Personal ]</button>
                     <button class="filter-btn" onclick="filterProjects('pc')">[ PC (.exe) ]</button>
+                    <button class="filter-btn" onclick="filterProjects('mobile')">[ Mobile ]</button>
+                    <button class="filter-btn" onclick="filterProjects('console')">[ Console ]</button>
                 </section>
 
                 <section class="project-grid">
 
                     <!-- TIER 1: Hero Project — AAA -->
-                    <article class="project-card professional hero">
+                    <article class="project-card professional console hero">
                         <div class="card-header">// TIER_1: HERO_PROJECT — AAA PRODUCTION</div>
-                        <img class="card-img" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta — AAA title by Mega Cat Studios">
+                        <img class="card-img zoomable" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta — AAA title by Mega Cat Studios" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// GOD OF WAR: SONS OF SPARTA')">
                         <div class="card-content">
                             <h3>God of War: Sons of Sparta</h3>
                             <p class="card-subtitle"><strong>Mega Cat Studios</strong> | Unity Developer (Mar 2025 - Present)</p>
                             <p>AAA production title for PlayStation. Contributed to gameplay and UI systems in a large-scale production environment with cross-discipline teams.</p>
                             <p class="card-contribution">My contribution: Implemented and maintained UI features, built reusable UI components and custom editor tooling for designers, developed scalable UI architecture, and performed bug fixing, optimization, and profiling.</p>
+                            <blockquote class="lead-quote">
+                                <p>"He was able to parse through a larger code-base and adapt to its design sensibilities, plus is able to both independently work on the tasks he was given while also not being afraid to ask critical questions that solidified task goals. Despite the project we were on being tied to game development, he also was able to flex his previous job and coding experiences outside the game industry to create some nice quality of life tools to help speed project development tasks up!</p>
+                                <p>Strong programmer, strong communicator, strong recommendation!"</p>
+                                <footer>— <a href="https://www.linkedin.com/in/jacob-manzano/" target="_blank" rel="noopener" aria-label="Jacob Manzano on LinkedIn (opens in new tab)">Jacob Manzano</a>, Game Developer &amp; Direct Supervisor · Mega Cat Studios</footer>
+                            </blockquote>
                             <a href="https://store.playstation.com/en-us/concept/10012744/" target="_blank" class="download-btn" style="margin-top: auto;">
                                 <i class="fab fa-playstation"></i> PlayStation Store
                             </a>
@@ -67,13 +76,28 @@
                     <!-- TIER 2: Support Projects -->
                     <article class="project-card personal pc">
                         <div class="card-header">// TIER_2: sys.run("Mawasure_RPG.exe")</div>
-                        <img class="card-img" src="img/mawasure.jpg" alt="Mawasure — 3D RPG Prototype">
+                        <img class="card-img zoomable" src="img/mawasure.jpg" alt="Mawasure — 3D RPG Prototype" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// MAWASURE — RPG PROTOTYPE')">
                         <div class="card-content">
                             <h3>Mawasure</h3>
                             <span class="card-tier">8 DESIGN PATTERNS</span>
                             <p class="card-subtitle"><strong>3D RPG Prototype — Unity</strong></p>
                             <p>RPG where players design combat strategies through a modular spell system (single, multi, AOE, chain cast) built with ScriptableObjects + custom editor. Strategic combat based on casting times, ranges and spell synergies. Dynamic spell customization UI and state-based enemy AI.</p>
                             <p class="card-patterns">Object Pool, Service Locator, Flyweight, Command, Abstract Factory, State Machine, Strategy, Wrapper.</p>
+                            <details class="card-challenges">
+                                <summary>// KEY TECHNICAL CHALLENGES</summary>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Each spell type (Single, AOE, Chain) needs different config fields — exposing all on every ScriptableObject clutters the inspector and confuses designers.
+                                    <br><span class="ch-label">SOLUTION</span> <code>[SerializeReference]</code> polymorphic field + custom <code>PropertyDrawer</code> that conditionally renders only the relevant fields per selected strategy. Designers see a dropdown and only what they need.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Spells are shared ScriptableObjects (Flyweight), but each equipped instance needs its own runtime level state — you can't store mutable data on a SO.
+                                    <br><span class="ch-label">SOLUTION</span> <code>SpellInstanceWrapper</code> implements <code>ISpells</code>, wraps the shared SO reference, and adds <code>instanceLevel</code>. All consuming code works against the interface — no coupling to the wrapper.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Enemy spawning caused GC allocation spikes. Factory also needed to spawn by category (random, strongest, weakest).
+                                    <br><span class="ch-label">SOLUTION</span> Abstract Factory + <code>ObjectPool&lt;Enemy&gt;</code> using a <code>LinkedList</code>. Enemies self-register back into the pool via their <code>OnDeath</code> event — zero allocation on spawn when pool is warm.
+                                </div>
+                            </details>
                             <div class="card-links">
                                 <a href="https://mauronu.itch.io/mawasure" target="_blank" class="download-btn">
                                     <i class="fas fa-gamepad"></i> Play on Itch.io
@@ -88,9 +112,11 @@
                     <article class="project-card personal pc">
                         <div class="card-header">// TIER_2: sys.run("ShadowBound.exe")</div>
                         <div class="card-carousel">
-                            <img class="carousel-img active" src="img/Shadowbound/mainmenu.png" alt="ShadowBound — Main Menu">
-                            <img class="carousel-img" src="img/Shadowbound/batalla.png" alt="ShadowBound — Combat">
-                            <img class="carousel-img" src="img/Shadowbound/construction.png" alt="ShadowBound — Construction">
+                            <img class="carousel-img active" src="img/Shadowbound/mainmenu.png" alt="ShadowBound — Main Menu" loading="lazy">
+                            <img class="carousel-img" src="img/Shadowbound/batalla.png" alt="ShadowBound — Combat" loading="lazy">
+                            <img class="carousel-img" src="img/Shadowbound/construction.png" alt="ShadowBound — Construction" loading="lazy">
+                            <div class="carousel-click-zone" onclick="expandCarousel(this)" aria-hidden="true"></div>
+                            <span class="carousel-zoom-hint" aria-hidden="true">◉ CLICK TO EXPAND</span>
                             <button class="carousel-btn prev" onclick="carouselMove(this, -1)">&#8249;</button>
                             <button class="carousel-btn next" onclick="carouselMove(this, 1)">&#8250;</button>
                             <div class="carousel-dots">
@@ -106,19 +132,43 @@
                             <p>Hybrid AI system where a visual Decision Tree drives FSM state transitions. 7 FSM states (Attack, Block, Evade, Measure, Pursue, Heal, Idle) resolved at runtime via reflection. Custom DT nodes with hysteresis, weighted probability, and distance-proportional randomization for emergent behavior.</p>
                             <p>Full flocking system (Craig Reynolds) with role-specific extensions: MeleeEncircle for formation-based surrounding, RangedSpread with 8-direction scoring for tactical repositioning. Steering behaviors: Seek, Pursuit, Evade, ObstacleAvoidance.</p>
                             <p>Third-person player controller with combo attack system, parry window (0.2s) with counter-attacks, lock-on targeting (Cinemachine integration), 3 skill slots with cooldowns, and a charge ultimate with physics-based pushback.</p>
+                            <figure class="arch-diagram">
+                                <button type="button" class="arch-diagram-trigger" onclick="openDiagramModal('img/shadowbound-architecture.svg', 'ShadowBound AI architecture — full view', '// AI_ARCHITECTURE — FULL VIEW')" aria-label="Expand architecture diagram to full view">
+                                    <img src="img/shadowbound-architecture.svg" alt="ShadowBound AI architecture diagram: Decision Tree drives FSM states which dispatch to Steering and Flocking behaviors" class="arch-img" loading="lazy">
+                                    <span class="arch-zoom-hint" aria-hidden="true">◉ CLICK TO EXPAND</span>
+                                </button>
+                                <figcaption>// AI_ARCHITECTURE — DecisionTree → FSM → Steering + Flocking</figcaption>
+                            </figure>
                             <p class="card-contribution">My contribution: Full ownership of AI architecture (Decision Trees + FSM + flocking), player controller, event bus system, custom FSM Editor Window, and TypeSelector property drawer. The AI system was designed to be fully editable by game designers through ScriptableObjects and visual editors.</p>
                             <p class="card-patterns">State, Strategy, Observer, Service Locator, Singleton, Command, Composite, Template Method, Data-Driven Design.</p>
+                            <details class="card-challenges">
+                                <summary>// KEY TECHNICAL CHALLENGES</summary>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Enemy near attack-range boundary caused AI to oscillate between Pursue and Attack every frame — jittery, unrealistic behavior.
+                                    <br><span class="ch-label">SOLUTION</span> Hysteresis in <code>IsPlayerInRange</code>: uses a tight threshold to <em>exit</em> pursuit, but a wider threshold (<code>attackRadius + pursuitThreshold</code>) to <em>enter</em> it. Once committed, the enemy stays committed.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Running <code>OverlapSphere</code> neighbor queries for every boid every frame is O(n²) and generates GC pressure.
+                                    <br><span class="ch-label">SOLUTION</span> Temporal caching (recalculates every 0.15s, returns cached waypoint on intermediate frames) + <code>OverlapSphereNonAlloc</code> with a pre-allocated buffer — eliminates per-frame GC allocation entirely.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Multiple melee enemies encircling the player could claim the same angular slot, causing stacking collisions.
+                                    <br><span class="ch-label">SOLUTION</span> Deterministic slot assignment: all melee boids sorted by <code>GetHashCode()</code> (stable per-instance), each gets <code>360° / totalMelee × index</code>. No central coordinator needed — emergent formation from local data.
+                                </div>
+                            </details>
                             <a href="https://mauronu.itch.io" target="_blank" class="download-btn" style="margin-top: auto;">
                                 <i class="fas fa-gamepad"></i> Itch.io
                             </a>
                         </div>
                     </article>
 
-                    <article class="project-card personal pc">
+                    <article class="project-card personal pc mobile">
                         <div class="card-header">// TIER_2: sys.run("ChroniclesOfAPixel.exe")</div>
                         <div class="card-carousel">
-                            <img class="carousel-img active" src="img/chronicles/mainmenu.png" alt="Chronicles of a Pixel — Main Menu">
-                            <img class="carousel-img" src="img/chronicles/gameplaylvl1.png" alt="Chronicles of a Pixel — Gameplay Level 1">
+                            <img class="carousel-img active" src="img/chronicles/mainmenu.png" alt="Chronicles of a Pixel — Main Menu" loading="lazy">
+                            <img class="carousel-img" src="img/chronicles/gameplaylvl1.png" alt="Chronicles of a Pixel — Gameplay Level 1" loading="lazy">
+                            <div class="carousel-click-zone" onclick="expandCarousel(this)" aria-hidden="true"></div>
+                            <span class="carousel-zoom-hint" aria-hidden="true">◉ CLICK TO EXPAND</span>
                             <button class="carousel-btn prev" onclick="carouselMove(this, -1)">&#8249;</button>
                             <button class="carousel-btn next" onclick="carouselMove(this, 1)">&#8250;</button>
                             <div class="carousel-dots">
@@ -131,16 +181,49 @@
                             <p class="card-subtitle"><strong>2D Action Mobile Game — Unity (Beta)</strong></p>
                             <p>Mobile action game with 5 distinct enemy types (homing meteorites, lasers, bombers with mines, black hole gravity wells), dynamic difficulty scaling (spawn rates halve when planet recovers), and a color-matching collection mechanic across 3 mechanically distinct levels. Built with floating joystick, Android haptics, and Google Play integration.</p>
                             <p class="card-contribution">My contribution: All gameplay programming — 5 enemy behaviors, spawner with dynamic difficulty, player controller (nitro, teleport, color matching), level progression, save system, and audio management. Art by Mart&iacute;n Morbelli.</p>
+                            <details class="card-challenges">
+                                <summary>// KEY TECHNICAL CHALLENGES</summary>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> After collecting a pixel, re-rolling the same color would make the next target trivially adjacent — removing tension.
+                                    <br><span class="ch-label">SOLUTION</span> On collection, the collected color is removed from the candidate pool before the random roll. The player always gets a <em>different</em> color, forcing repositioning every pickup.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> A naive teleport (negating world position) breaks if the map isn't centered at world origin.
+                                    <br><span class="ch-label">SOLUTION</span> <code>InverseTransformPoint</code> converts the player's world position into the map's local space, negates X/Y to mirror through the map's actual center, then <code>TransformPoint</code> converts back. Works regardless of map placement.
+                                </div>
+                            </details>
                         </div>
                     </article>
 
                     <!-- TIER 3: Experimental / Academic -->
                     <article class="project-card personal pc">
                         <div class="card-header">// TIER_3: sys.run("BearsAgainstTime.exe")</div>
+                        <img class="card-img zoomable" src="img/bearsagainsttime.jpg" alt="Bears Against Time — terminal game screenshot" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// BEARS AGAINST TIME')">
                         <div class="card-content">
                             <h3>Bears Against Time</h3>
-                            <p class="card-subtitle"><strong>Console Adventure Game — C (FIUBA, 2020)</strong></p>
-                            <p>A "We Bare Bears"-inspired rescue game built entirely in C for my first Algorithms course at UBA. 3 playable bears with unique abilities (rock jumping, faster navigation, GPS tracking). Procedural map with resource management and time pressure.</p>
+                            <span class="card-tier">~1.2K LOC · PURE C · FIUBA 2020</span>
+                            <p class="card-subtitle"><strong>Terminal Adventure Game — C (FIUBA, 2020)</strong></p>
+                            <p>Procedurally-generated rescue game where the player picks between 3 bears — each with asymmetric collision rules and unique abilities (Polar ignores rocks, Pardo halves tree penalty, Panda unlocks GPS after 30s lost) — and races a 120s timer across a 20×30 forest with 431 obstacles, 70 tools and three distinct light sources.</p>
+                            <p class="card-contribution">My contribution: solo author. Designed the procedural map generator with collision-free placement, asymmetric character abilities via conditional dispatch, multi-source fog-of-war (directional raycast, 3×3 aura, Manhattan-distance radius) and a real-time game loop with input validation.</p>
+                            <details class="card-challenges">
+                                <summary>// KEY TECHNICAL CHALLENGES</summary>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Spawn 431 obstacles + 70 tools across a 20×30 grid with zero overlaps — a naive retry loop could spin forever near saturation.
+                                    <br><span class="ch-label">SOLUTION</span> <code>inicializar_mapa()</code> allocates a temporary <code>tablero_aux[20][30]</code> matrix as a spatial index; <code>validar_y_asignar_posicion_obstaculos()</code> re-randomizes only until a <code>VACIO</code> cell is hit. O(1) occupancy check instead of linear scan over 500+ entities per placement.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Three bears with different collision costs (Polar jumps rocks, Pardo loses half time on trees) without duplicating the whole movement pipeline.
+                                    <br><span class="ch-label">SOLUTION</span> Single <code>colision_obs_personaje()</code> switches on <code>tipo_personaje</code> (I/P/G). Backpack contents are bear-specific too — <code>llenar_mochila()</code> reads the same enum and tops up +2 velas / +2 bengalas / +5 linterna moves. One dispatch point instead of three parallel code paths.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Three light sources with totally different illumination shapes — directional ray (linterna), 3×3 aura (vela), Manhattan radius (bengala) — each draining its own counter.
+                                    <br><span class="ch-label">SOLUTION</span> <code>actualizar_visibilidad()</code> dispatches on tool type and reads <code>movimientos_restantes</code> per instance. Linterna checks <code>ultimo_movimiento</code> (W/A/S/D) to project a ray; <code>iluminado_por_vela()</code> unrolls 8 adjacent cells; bengala stores a random center and uses <code>distancia_manhattan() ≤ 3</code>.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Removing picked-up items from the world without reallocation or leaving holes in the obstacle array.
+                                    <br><span class="ch-label">SOLUTION</span> <code>borrar_elemento_mapa()</code> swap-and-pop — copies the tail element into the removed slot and decrements the count. O(1) deletion on a flat array-of-structs, no <code>malloc/free</code> churn during gameplay.
+                                </div>
+                            </details>
                         </div>
                     </article>
 
@@ -158,6 +241,21 @@
             <a href="https://mauronu.itch.io" target="_blank">Itch.io</a>
         </div>
     </footer>
+
+    <!-- Diagram lightbox modal -->
+    <div id="diagram-modal" class="diagram-modal" role="dialog" aria-modal="true" aria-labelledby="diagram-modal-title" hidden>
+        <div class="diagram-modal-backdrop" onclick="closeDiagramModal()" aria-hidden="true"></div>
+        <div class="diagram-modal-content" role="document">
+            <header class="diagram-modal-header">
+                <span id="diagram-modal-title">// AI_ARCHITECTURE — FULL VIEW</span>
+                <button type="button" class="diagram-modal-close" onclick="closeDiagramModal()" aria-label="Close diagram">[ X ] CLOSE</button>
+            </header>
+            <div class="diagram-modal-body">
+                <img id="diagram-modal-img" src="" alt="">
+            </div>
+            <footer class="diagram-modal-hint" aria-hidden="true">press [ ESC ] or click outside to close</footer>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

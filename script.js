@@ -128,7 +128,9 @@ const data = {
 > [4] Chronicles of a Pixel — 2D Action | Beta
 
   TIER 3 — EXPERIMENTAL:
-> [5] Bears Against Time — C (FIUBA 2020)
+> [5] Bears Against Time — C | FIUBA 2020
+      ~1.2K LOC | procedural map + fog-of-war
+      asymmetric 3-character dispatch
 
 > LOADING VISUAL MODULES...
 > READY.`
@@ -139,12 +141,18 @@ function showSection(key) {
     output.textContent = "";
     projectShowcase.style.display = 'none';
 
-    // Update active nav button
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    // Update active nav button + aria-pressed
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+    });
     const buttons = document.querySelectorAll('.nav-btn');
-    const sectionKeys = ['about', 'skills', 'experience', 'education', 'projects'];
+    const sectionKeys = ['about', 'projects', 'skills', 'experience', 'education'];
     const idx = sectionKeys.indexOf(key);
-    if (idx >= 0 && buttons[idx]) buttons[idx].classList.add('active');
+    if (idx >= 0 && buttons[idx]) {
+        buttons[idx].classList.add('active');
+        buttons[idx].setAttribute('aria-pressed', 'true');
+    }
 
     // Scroll to top before typing
     const consoleScreen = document.querySelector('.console-screen');
@@ -153,7 +161,15 @@ function showSection(key) {
     typeWriter(data[key], 0, key);
 }
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 function typeWriter(text, i, currentKey) {
+    // Skip animation for users who prefer reduced motion
+    if (prefersReducedMotion) {
+        output.textContent = text;
+        if (currentKey === 'projects') projectShowcase.style.display = 'block';
+        return;
+    }
     if (i < text.length) {
         output.textContent += text.charAt(i);
         i++;
@@ -196,5 +212,57 @@ function carouselMove(btn, direction) {
     imgs[current].classList.add('active');
     dots[current].classList.add('active');
 }
+
+function expandCarousel(el) {
+    const carousel = el.closest('.card-carousel');
+    const active = carousel ? carousel.querySelector('.carousel-img.active') : null;
+    if (active) openDiagramModal(active.src, active.alt, '// IMAGE VIEW');
+}
+
+/* ================================ */
+/* === DIAGRAM LIGHTBOX MODAL   === */
+/* ================================ */
+let _lastFocusBeforeModal = null;
+
+function openDiagramModal(src, alt, title) {
+    const modal = document.getElementById('diagram-modal');
+    const img = document.getElementById('diagram-modal-img');
+    const titleEl = document.getElementById('diagram-modal-title');
+    if (!modal || !img) return;
+
+    _lastFocusBeforeModal = document.activeElement;
+    img.src = src;
+    img.alt = alt || '';
+    if (title && titleEl) titleEl.textContent = title;
+
+    // Wide layout only for SVG diagrams, centered fit for photos
+    const isSvg = src.toLowerCase().endsWith('.svg');
+    modal.classList.toggle('modal--diagram', isSvg);
+
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    // Move focus to close button for a11y
+    const closeBtn = modal.querySelector('.diagram-modal-close');
+    if (closeBtn) closeBtn.focus();
+}
+
+function closeDiagramModal() {
+    const modal = document.getElementById('diagram-modal');
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    // Restore focus to whatever triggered the modal
+    if (_lastFocusBeforeModal && typeof _lastFocusBeforeModal.focus === 'function') {
+        _lastFocusBeforeModal.focus();
+    }
+    _lastFocusBeforeModal = null;
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('diagram-modal');
+        if (modal && !modal.hidden) closeDiagramModal();
+    }
+});
 
 window.onload = () => showSection('about');
