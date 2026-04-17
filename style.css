@@ -107,6 +107,22 @@ body::before {
     text-shadow: 0 0 10px var(--green-neon);
 }
 
+/* CV download — sits in side-nav below Education, distinct visual weight */
+.nav-btn--cv {
+    text-decoration: none;
+    margin-top: 8px;
+    background: rgba(0, 255, 65, 0.06);
+    padding: 10px 10px;
+    font-size: clamp(0.72rem, 0.68rem + 0.2vw, 0.84rem);
+}
+.nav-btn--cv:hover,
+.nav-btn--cv:focus-visible {
+    background: var(--green-neon);
+    color: #000;
+    box-shadow: 0 0 12px rgba(0, 255, 65, 0.5);
+    outline: none;
+}
+
 /* ================================ */
 /* === TERMINAL LAYOUT          === */
 /* ================================ */

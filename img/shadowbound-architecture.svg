@@ -15,9 +15,6 @@
   <!-- Background -->
   <rect width="820" height="560" fill="#080808"/>
 
-  <!-- Scanline texture overlay -->
-  <rect width="820" height="560" fill="url(#scanlines)" opacity="0.04"/>
-
   <!-- Title -->
   <text x="410" y="30" text-anchor="middle" fill="#00ff41" font-size="13" font-weight="bold" filter="url(#glow)" letter-spacing="2">// SHADOWBOUND — AI ARCHITECTURE</text>
   <line x1="60" y1="40" x2="760" y2="40" stroke="#2a8a3e" stroke-width="1" opacity="0.6"/>
