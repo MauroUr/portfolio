@@ -7,19 +7,14 @@ const data = {
 
 > NAME: Mauro Nahuel Uriarte
 > ROLE: Unity UI/Gameplay Programmer
-> FOCUS: Modular systems, scalable architecture,
-        production-ready code
+> FOCUS: Modular systems, scalable architecture, production-ready code
 > LOCATION: Buenos Aires, Argentina
 > CONTACT: mauronuriarte@gmail.com
 
 > SUMMARY:
-  Gameplay programmer specialized in UI systems,
-  gameplay architecture, and editor tooling for
-  Unity. Experienced shipping AAA titles and
-  building modular, pattern-driven game systems.
+  Gameplay programmer specialized in UI systems, gameplay architecture, and editor tooling for Unity. Experienced shipping AAA titles and building modular, pattern-driven game systems.
 
-  Currently at Mega Cat Studios contributing to
-  God of War: Sons of Sparta (PlayStation).
+  Currently at Mega Cat Studios contributing to God of War: Sons of Sparta (PlayStation).
 
 > COMPETENCIES:
   - Cross-discipline collaboration
@@ -84,25 +79,18 @@ const data = {
   ─────────────────────────────────────
   Project: God of War: Sons of Sparta (AAA)
 
-  - Contributed to gameplay and UI systems
-    on a PlayStation title
-  - Implemented and maintained UI features
-    in a production environment
-  - Built reusable UI components and custom
-    editor tooling to support designer iteration
-  - Developed scalable UI architecture for
-    gameplay features
-  - Collaborated with designers, artists and
-    engineers across disciplines
+  - Contributed to gameplay and UI systems on a PlayStation title
+  - Implemented and maintained UI features in a production environment
+  - Built reusable UI components and custom editor tooling to support designer iteration
+  - Developed scalable UI architecture for gameplay features
+  - Collaborated with designers, artists and engineers across disciplines
   - Bug fixing, optimization and profiling
 
 > [PREV] Accenture
   Full Stack Developer — Mar 2022 to Aug 2023
   ─────────────────────────────────────
-  - Software engineering foundation in
-    architecture, scalable systems, APIs, CI/CD
-  - Production experience with enterprise-level
-    codebases and workflows`,
+  - Software engineering foundation in architecture, scalable systems, APIs, CI/CD
+  - Production experience with enterprise-level codebases and workflows`,
 
     education: `> RETRIEVING ACADEMIC RECORDS...
 
@@ -116,24 +104,7 @@ const data = {
   Bachelor's Degree in System's Analysis
   (unfinished — pivoted to game development)`,
 
-    projects: `> ACCESSING PROJECT FILES...
-
-  TIER 1 — HERO PROJECT:
-> [1] God of War: Sons of Sparta
-      AAA | UI Backend | Mega Cat Studios
-
-  TIER 2 — SUPPORT PROJECTS:
-> [2] Mawasure — RPG | 8 Design Patterns
-> [3] ShadowBound — AI | Decision Trees + FSM
-> [4] Chronicles of a Pixel — 2D Action | Beta
-
-  TIER 3 — EXPERIMENTAL:
-> [5] Bears Against Time — C | FIUBA 2020
-      ~1.2K LOC | procedural map + fog-of-war
-      asymmetric 3-character dispatch
-
-> LOADING VISUAL MODULES...
-> READY.`
+    // projects: handled by typeProjectsSequence() — staged boot lines
 };
 
 function showSection(key) {
@@ -158,7 +129,54 @@ function showSection(key) {
     const consoleScreen = document.querySelector('.console-screen');
     consoleScreen.scrollTop = 0;
 
-    typeWriter(data[key], 0, key);
+    if (key === 'projects') {
+        typeProjectsSequence();
+    } else {
+        typeWriter(data[key], 0, key);
+    }
+}
+
+/* Projects intro: type line → 1s pause → type next line → 1s pause → last line → show grid instantly. */
+function typeProjectsSequence() {
+    const lines = [
+        '> ACCESSING PROJECT FILES...',
+        '> LOADING VISUAL MODULES...',
+        '> READY.'
+    ];
+
+    if (prefersReducedMotion) {
+        output.textContent = lines.join('\n');
+        projectShowcase.style.display = 'block';
+        return;
+    }
+
+    let lineIdx = 0;
+    let charIdx = 0;
+
+    function typeLine() {
+        if (charIdx < lines[lineIdx].length) {
+            output.textContent += lines[lineIdx].charAt(charIdx);
+            charIdx++;
+            typingTimeout = setTimeout(typeLine, 4);
+        } else {
+            // Line finished.
+            const isLast = lineIdx === lines.length - 1;
+            if (isLast) {
+                // Show grid instantly after READY is fully typed.
+                projectShowcase.style.display = 'block';
+                return;
+            }
+            // Pause 1s, then newline + next line.
+            typingTimeout = setTimeout(() => {
+                output.textContent += '\n';
+                lineIdx++;
+                charIdx = 0;
+                typeLine();
+            }, 1000);
+        }
+    }
+
+    typeLine();
 }
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -167,17 +185,12 @@ function typeWriter(text, i, currentKey) {
     // Skip animation for users who prefer reduced motion
     if (prefersReducedMotion) {
         output.textContent = text;
-        if (currentKey === 'projects') projectShowcase.style.display = 'block';
         return;
     }
     if (i < text.length) {
         output.textContent += text.charAt(i);
         i++;
         typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 4);
-    } else {
-        if (currentKey === 'projects') {
-            projectShowcase.style.display = 'block';
-        }
     }
 }
 
