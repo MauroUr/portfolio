@@ -553,9 +553,10 @@ body::before {
 /* === SKIP LINK (accessibility) === */
 /* ================================ */
 .skip-link {
-    position: absolute;
-    top: -100%;
+    position: fixed;
+    top: 0;
     left: 0;
+    transform: translateY(-100%);
     background: var(--green-neon);
     color: var(--bg-surface);
     padding: 8px 16px;
@@ -564,10 +565,10 @@ body::before {
     font-size: 0.9rem;
     z-index: 9999;
     text-decoration: none;
-    transition: top 0.1s;
+    transition: transform 0.1s;
 }
 .skip-link:focus {
-    top: 0;
+    transform: translateY(0);
 }
 
 /* ================================ */
