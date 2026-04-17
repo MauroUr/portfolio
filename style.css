@@ -65,6 +65,7 @@ body::before {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .status-dot {
@@ -143,7 +144,8 @@ body::before {
 #console-output {
     margin-bottom: 20px;
     line-height: 1.7;
-    white-space: pre-wrap;
+
+    white-space: pre-line;
     font-size: clamp(0.88rem, 0.84rem + 0.2vw, 1.02rem);
     letter-spacing: 0.3px;
     max-width: 75ch;
