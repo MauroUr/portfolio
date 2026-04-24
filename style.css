@@ -535,6 +535,17 @@ iframe.carousel-video.active {
     color: var(--bg-surface);
 }
 
+/* Subtle note below download buttons — e.g. unsigned APK caveat */
+.install-note {
+    display: block;
+    margin-top: 6px;
+    color: var(--green-dim);
+    font-family: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 0.3px;
+    opacity: 0.8;
+}
+
 /* ================================ */
 /* === WEBGL CONTAINER          === */
 /* ================================ */
