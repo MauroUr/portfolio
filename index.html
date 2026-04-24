@@ -143,7 +143,17 @@
 
                     <article class="project-card personal pc">
                         <div class="card-header">// TIER_2: sys.run("Mawasure_RPG.exe")</div>
-                        <img class="card-img zoomable" src="img/mawasure.jpg" alt="Mawasure — 3D RPG Prototype" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// MAWASURE — RPG PROTOTYPE')">
+                        <div class="card-carousel">
+                            <img class="carousel-img carousel-img--zoomable active" src="img/mawasure.jpg" alt="Mawasure — 3D RPG Prototype" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// MAWASURE — RPG PROTOTYPE')">
+                            <iframe class="carousel-img carousel-video" src="https://www.youtube-nocookie.com/embed/ye1aFksQzcQ" title="Mawasure — Gameplay Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                            <span class="carousel-zoom-hint" aria-hidden="true">◉ CLICK TO EXPAND</span>
+                            <button class="carousel-btn prev" onclick="carouselMove(this, -1)" aria-label="Previous media">&#8249;</button>
+                            <button class="carousel-btn next" onclick="carouselMove(this, 1)" aria-label="Next media">&#8250;</button>
+                            <div class="carousel-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
                         <div class="card-content">
                             <h3>Mawasure</h3>
                             <span class="card-tier">8 DESIGN PATTERNS</span>
