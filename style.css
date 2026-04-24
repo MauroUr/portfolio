@@ -151,7 +151,7 @@ body::before {
     color: var(--green-neon);
     padding: 10px 14px;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
     transition: all 0.2s;
     font-family: inherit;
     font-weight: bold;
@@ -743,8 +743,15 @@ iframe.carousel-video.active {
     pointer-events: none;
 }
 
-.card-carousel:hover .carousel-zoom-hint {
+.card-carousel:hover .carousel-zoom-hint,
+.card-img-wrap:hover .carousel-zoom-hint {
     opacity: 1;
+}
+
+/* Wrapper for single zoomable images (non-carousel) to anchor zoom hint */
+.card-img-wrap {
+    position: relative;
+    flex-shrink: 0;
 }
 
 /* ================================ */
