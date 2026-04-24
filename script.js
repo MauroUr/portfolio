@@ -190,18 +190,23 @@ function carouselMove(btn, direction) {
     const dots = carousel.querySelectorAll('.dot');
 
     let current = [...imgs].findIndex(img => img.classList.contains('active'));
+    const prevEl = imgs[current];
     imgs[current].classList.remove('active');
     dots[current].classList.remove('active');
 
     current = (current + direction + imgs.length) % imgs.length;
     imgs[current].classList.add('active');
     dots[current].classList.add('active');
+
+    if (prevEl.tagName === 'IFRAME') {
+        prevEl.src = prevEl.src;
+    }
 }
 
 function expandCarousel(el) {
     const carousel = el.closest('.card-carousel');
     const active = carousel ? carousel.querySelector('.carousel-img.active') : null;
-    if (active) openDiagramModal(active.src, active.alt, '// IMAGE VIEW');
+    if (active && active.tagName === 'IMG') openDiagramModal(active.src, active.alt, '// IMAGE VIEW');
 }
 
 function openDiagramModal(src, alt, title) {
