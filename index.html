@@ -61,8 +61,9 @@
                     <article class="project-card professional console hero">
                         <div class="card-header">// TIER_1: HERO_PROJECT — AAA PRODUCTION</div>
                         <div class="card-carousel card-carousel--hero">
-                            <img class="carousel-img active" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta — AAA title by Mega Cat Studios" loading="lazy">
+                            <img class="carousel-img carousel-img--zoomable active" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta — AAA title by Mega Cat Studios" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// GOD OF WAR: SONS OF SPARTA')">
                             <iframe class="carousel-img carousel-video" src="https://www.youtube-nocookie.com/embed/eFhOo6NTt70" title="God of War: Sons of Sparta — Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                            <span class="carousel-zoom-hint" aria-hidden="true">◉ CLICK TO EXPAND</span>
                             <button class="carousel-btn prev" onclick="carouselMove(this, -1)" aria-label="Previous media">&#8249;</button>
                             <button class="carousel-btn next" onclick="carouselMove(this, 1)" aria-label="Next media">&#8250;</button>
                             <div class="carousel-dots">

@@ -342,6 +342,20 @@ iframe.carousel-video.active {
     pointer-events: auto;
 }
 
+/* Zoomable image in a carousel — only clickable when it's the active slide */
+.carousel-img--zoomable {
+    pointer-events: none;
+}
+.carousel-img--zoomable.active {
+    pointer-events: auto;
+    cursor: zoom-in;
+}
+
+/* Hide zoom hint when a video slide is active (hint only applies to images) */
+.card-carousel:has(iframe.carousel-video.active) .carousel-zoom-hint {
+    display: none;
+}
+
 .project-card:hover .carousel-img.active {
     filter: saturate(1) brightness(1);
 }
