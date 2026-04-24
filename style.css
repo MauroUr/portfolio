@@ -304,6 +304,18 @@ iframe.carousel-video.active {
     pointer-events: auto;
 }
 
+.carousel-img--zoomable {
+    pointer-events: none;
+}
+.carousel-img--zoomable.active {
+    pointer-events: auto;
+    cursor: zoom-in;
+}
+
+.card-carousel:has(iframe.carousel-video.active) .carousel-zoom-hint {
+    display: none;
+}
+
 .project-card:hover .carousel-img.active {
     filter: saturate(1) brightness(1);
 }
