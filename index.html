@@ -60,7 +60,16 @@
                     <!-- TIER 1: Hero Project — AAA -->
                     <article class="project-card professional console hero">
                         <div class="card-header">// TIER_1: HERO_PROJECT — AAA PRODUCTION</div>
-                        <img class="card-img zoomable" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta — AAA title by Mega Cat Studios" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// GOD OF WAR: SONS OF SPARTA')">
+                        <div class="card-carousel card-carousel--hero">
+                            <img class="carousel-img active" src="img/god-of-war.jpg" alt="God of War: Sons of Sparta — AAA title by Mega Cat Studios" loading="lazy">
+                            <iframe class="carousel-img carousel-video" src="https://www.youtube-nocookie.com/embed/eFhOo6NTt70" title="God of War: Sons of Sparta — Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                            <button class="carousel-btn prev" onclick="carouselMove(this, -1)" aria-label="Previous media">&#8249;</button>
+                            <button class="carousel-btn next" onclick="carouselMove(this, 1)" aria-label="Next media">&#8250;</button>
+                            <div class="carousel-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
                         <div class="card-content">
                             <h3>God of War: Sons of Sparta</h3>
                             <p class="card-subtitle"><strong>Mega Cat Studios</strong> | Unity Developer (Mar 2025 - Present)</p>
@@ -78,41 +87,6 @@
                     </article>
 
                     <!-- TIER 2: Support Projects -->
-                    <article class="project-card personal pc">
-                        <div class="card-header">// TIER_2: sys.run("Mawasure_RPG.exe")</div>
-                        <img class="card-img zoomable" src="img/mawasure.jpg" alt="Mawasure — 3D RPG Prototype" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// MAWASURE — RPG PROTOTYPE')">
-                        <div class="card-content">
-                            <h3>Mawasure</h3>
-                            <span class="card-tier">8 DESIGN PATTERNS</span>
-                            <p class="card-subtitle"><strong>3D RPG Prototype — Unity</strong></p>
-                            <p>RPG where players design combat strategies through a modular spell system (single, multi, AOE, chain cast) built with ScriptableObjects + custom editor. Strategic combat based on casting times, ranges and spell synergies. Dynamic spell customization UI and state-based enemy AI.</p>
-                            <p class="card-patterns">Object Pool, Service Locator, Flyweight, Command, Abstract Factory, State Machine, Strategy, Wrapper.</p>
-                            <details class="card-challenges">
-                                <summary>// KEY TECHNICAL CHALLENGES</summary>
-                                <div class="challenge-item">
-                                    <span class="ch-label">CHALLENGE</span> Each spell type (Single, AOE, Chain) needs different config fields — exposing all on every ScriptableObject clutters the inspector and confuses designers.
-                                    <br><span class="ch-label">SOLUTION</span> <code>[SerializeReference]</code> polymorphic field + custom <code>PropertyDrawer</code> that conditionally renders only the relevant fields per selected strategy. Designers see a dropdown and only what they need.
-                                </div>
-                                <div class="challenge-item">
-                                    <span class="ch-label">CHALLENGE</span> Spells are shared ScriptableObjects (Flyweight), but each equipped instance needs its own runtime level state — you can't store mutable data on a SO.
-                                    <br><span class="ch-label">SOLUTION</span> <code>SpellInstanceWrapper</code> implements <code>ISpells</code>, wraps the shared SO reference, and adds <code>instanceLevel</code>. All consuming code works against the interface — no coupling to the wrapper.
-                                </div>
-                                <div class="challenge-item">
-                                    <span class="ch-label">CHALLENGE</span> Enemy spawning caused GC allocation spikes. Factory also needed to spawn by category (random, strongest, weakest).
-                                    <br><span class="ch-label">SOLUTION</span> Abstract Factory + <code>ObjectPool&lt;Enemy&gt;</code> using a <code>LinkedList</code>. Enemies self-register back into the pool via their <code>OnDeath</code> event — zero allocation on spawn when pool is warm.
-                                </div>
-                            </details>
-                            <div class="card-links">
-                                <a href="https://mauronu.itch.io/mawasure" target="_blank" class="download-btn">
-                                    <i class="fas fa-gamepad"></i> Play on Itch.io
-                                </a>
-                                <a href="https://github.com/MauroUr/Mawasure" target="_blank" class="download-btn">
-                                    <i class="fab fa-github"></i> Source Code
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
                     <article class="project-card personal pc">
                         <div class="card-header">// TIER_2: sys.run("ShadowBound.exe")</div>
                         <div class="card-carousel">
@@ -160,9 +134,44 @@
                                     <br><span class="ch-label">SOLUTION</span> Deterministic slot assignment: all melee boids sorted by <code>GetHashCode()</code> (stable per-instance), each gets <code>360° / totalMelee × index</code>. No central coordinator needed — emergent formation from local data.
                                 </div>
                             </details>
-                            <a href="https://mauronu.itch.io" target="_blank" class="download-btn" style="margin-top: auto;">
-                                <i class="fas fa-gamepad"></i> Itch.io
+                            <a href="ShadowBound%20Build.zip" download class="download-btn" style="margin-top: auto;">
+                                <i class="fas fa-download"></i> Download Build (.zip)
                             </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card personal pc">
+                        <div class="card-header">// TIER_2: sys.run("Mawasure_RPG.exe")</div>
+                        <img class="card-img zoomable" src="img/mawasure.jpg" alt="Mawasure — 3D RPG Prototype" loading="lazy" onclick="openDiagramModal(this.src, this.alt, '// MAWASURE — RPG PROTOTYPE')">
+                        <div class="card-content">
+                            <h3>Mawasure</h3>
+                            <span class="card-tier">8 DESIGN PATTERNS</span>
+                            <p class="card-subtitle"><strong>3D RPG Prototype — Unity</strong></p>
+                            <p>RPG where players design combat strategies through a modular spell system (single, multi, AOE, chain cast) built with ScriptableObjects + custom editor. Strategic combat based on casting times, ranges and spell synergies. Dynamic spell customization UI and state-based enemy AI.</p>
+                            <p class="card-patterns">Object Pool, Service Locator, Flyweight, Command, Abstract Factory, State Machine, Strategy, Wrapper.</p>
+                            <details class="card-challenges">
+                                <summary>// KEY TECHNICAL CHALLENGES</summary>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Each spell type (Single, AOE, Chain) needs different config fields — exposing all on every ScriptableObject clutters the inspector and confuses designers.
+                                    <br><span class="ch-label">SOLUTION</span> <code>[SerializeReference]</code> polymorphic field + custom <code>PropertyDrawer</code> that conditionally renders only the relevant fields per selected strategy. Designers see a dropdown and only what they need.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Spells are shared ScriptableObjects (Flyweight), but each equipped instance needs its own runtime level state — you can't store mutable data on a SO.
+                                    <br><span class="ch-label">SOLUTION</span> <code>SpellInstanceWrapper</code> implements <code>ISpells</code>, wraps the shared SO reference, and adds <code>instanceLevel</code>. All consuming code works against the interface — no coupling to the wrapper.
+                                </div>
+                                <div class="challenge-item">
+                                    <span class="ch-label">CHALLENGE</span> Enemy spawning caused GC allocation spikes. Factory also needed to spawn by category (random, strongest, weakest).
+                                    <br><span class="ch-label">SOLUTION</span> Abstract Factory + <code>ObjectPool&lt;Enemy&gt;</code> using a <code>LinkedList</code>. Enemies self-register back into the pool via their <code>OnDeath</code> event — zero allocation on spawn when pool is warm.
+                                </div>
+                            </details>
+                            <div class="card-links">
+                                <a href="Mawasure%20Build.zip" download class="download-btn">
+                                    <i class="fas fa-download"></i> Download Build (.zip)
+                                </a>
+                                <a href="https://github.com/MauroUr/Mawasure" target="_blank" class="download-btn">
+                                    <i class="fab fa-github"></i> Source Code
+                                </a>
+                            </div>
                         </div>
                     </article>
 
@@ -228,6 +237,9 @@
                                     <br><span class="ch-label">SOLUTION</span> <code>borrar_elemento_mapa()</code> swap-and-pop — copies the tail element into the removed slot and decrements the count. O(1) deletion on a flat array-of-structs, no <code>malloc/free</code> churn during gameplay.
                                 </div>
                             </details>
+                            <a href="BearsAgainstTime%20Executable.zip" download class="download-btn" style="margin-top: auto;">
+                                <i class="fas fa-download"></i> Download Executable (.zip)
+                            </a>
                         </div>
                     </article>
 
