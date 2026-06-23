@@ -6,9 +6,9 @@
     --bg-surface: #0a0a0a;
     --bg-card: rgba(0, 25, 0, 0.35);
 
-    /* Green palette — neon for accents, softer for body text */
+    /* Green palette - neon for accents, softer for body text */
     --green-neon: #00ff41;        /* titles, borders, accents */
-    --green-body: #33ff66;        /* body text — reduced halation */
+    --green-body: #33ff66;        /* body text - reduced halation */
     --green-muted: #55cc66;       /* secondary info, patterns */
     --green-dim: #2a8a3e;         /* disabled / inactive */
     --green-glow: rgba(0, 255, 65, 0.12);
@@ -24,7 +24,7 @@
 /* === BASE                     === */
 /* ================================ */
 html {
-    font-size: 16px; /* rem anchor — respects user browser settings */
+    font-size: 16px; /* rem anchor - respects user browser settings */
 }
 
 body {
@@ -107,7 +107,7 @@ body::before {
     text-shadow: 0 0 10px var(--green-neon);
 }
 
-/* CV download — sits in side-nav below Education, distinct visual weight */
+/* CV download - sits in side-nav below Education, distinct visual weight */
 .nav-btn--cv {
     text-decoration: none;
     margin-top: 8px;
@@ -331,7 +331,7 @@ body::before {
     opacity: 1;
 }
 
-/* Video slide — iframe fills slot; black letterbox via background */
+/* Video slide - iframe fills slot; black letterbox via background */
 iframe.carousel-video {
     border: 0;
     background: #000;
@@ -342,7 +342,7 @@ iframe.carousel-video.active {
     pointer-events: auto;
 }
 
-/* Zoomable image in a carousel — only clickable when it's the active slide */
+/* Zoomable image in a carousel - only clickable when it's the active slide */
 .carousel-img--zoomable {
     pointer-events: none;
 }
@@ -549,7 +549,7 @@ iframe.carousel-video.active {
     color: var(--bg-surface);
 }
 
-/* Subtle note below download buttons — e.g. unsigned APK caveat */
+/* Subtle note below download buttons - e.g. unsigned APK caveat */
 .install-note {
     display: block;
     margin-top: 6px;
@@ -968,7 +968,7 @@ body.modal-open {
         transition-duration: 0.01ms !important;
     }
 
-    /* Instant typewriter — show all text immediately */
+    /* Instant typewriter - show all text immediately */
     #console-output {
         transition: none;
     }
@@ -1002,7 +1002,7 @@ body.modal-open {
 }
 
 /* ================================ */
-/* === RESPONSIVE — TABLET      === */
+/* === RESPONSIVE - TABLET      === */
 /* === (≤768px)                 === */
 /* ================================ */
 @media (max-width: 768px) {
@@ -1088,7 +1088,7 @@ body.modal-open {
 }
 
 /* ================================ */
-/* === RESPONSIVE — MOBILE      === */
+/* === RESPONSIVE - MOBILE      === */
 /* === (≤520px) header wrap     === */
 /* ================================ */
 @media (max-width: 520px) {
@@ -1118,7 +1118,7 @@ body.modal-open {
 }
 
 /* ================================ */
-/* === RESPONSIVE — MOBILE      === */
+/* === RESPONSIVE - MOBILE      === */
 /* === (≤480px)                 === */
 /* ================================ */
 @media (max-width: 480px) {

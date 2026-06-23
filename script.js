@@ -14,9 +14,11 @@ const data = {
 > SUMMARY:
   Gameplay programmer specialized in UI systems, gameplay architecture, and editor tooling for Unity. Experienced shipping AAA titles and building modular, pattern-driven game systems.
 
-  Currently at Mega Cat Studios contributing to God of War: Sons of Sparta (PlayStation).
+  At Mega Cat Studios: contributed to God of War: Sons of Sparta (PlayStation), and currently own the entire UI, several gameplay systems, and localization tooling on an unannounced title - while reviewing code, mentoring developers, onboarding new hires, and coordinating across UI and design teams.
 
 > COMPETENCIES:
+  - Full UI & systems ownership
+  - Code review & technical mentoring
   - Cross-discipline collaboration
   - Rapid feature iteration
   - Technical communication
@@ -25,14 +27,14 @@ const data = {
     skills: `> SCANNING TECH STACK...
 
 > PROGRAMMING:
-  C# ........... [primary — Unity, systems]
+  C# ........... [primary - Unity, systems]
   C++ .......... [Unreal, low-level]
   C ............ [algorithms, academic]
   Python ....... [tooling, scripting, automation]
   SQL .......... [data, queries]
 
 > ENGINES:
-  Unity ........ [professional — current]
+  Unity ........ [professional - current]
   Unreal ....... [secondary]
 
 > GAMEPLAY & SYSTEMS:
@@ -66,6 +68,13 @@ const data = {
   - APIs, CI/CD
   - Git (branching, PRs, conflict resolution)
 
+> LEADERSHIP & PROCESS:
+  - Code review & technical mentoring
+  - Onboarding & knowledge transfer
+  - Cross-team coordination (UI front-end, design)
+  - Localization tooling & automation
+  - Release management (Steam builds)
+
 > DESIGN PATTERNS:
   Object Pool, Service Locator, Command,
   Abstract Factory, Strategy, Flyweight,
@@ -75,10 +84,10 @@ const data = {
     experience: `> LOADING WORK HISTORY...
 
 > [CURRENT] Mega Cat Studios
-  Unity Developer — Mar 2025 to Present
+  Unity Developer - Mar 2025 to Present
   ─────────────────────────────────────
-  Project: God of War: Sons of Sparta (AAA)
 
+  // PROJECT_01 - God of War: Sons of Sparta (AAA, PlayStation)
   - Contributed to gameplay and UI systems on a PlayStation title
   - Implemented and maintained UI features in a production environment
   - Built reusable UI components and custom editor tooling to support designer iteration
@@ -86,25 +95,34 @@ const data = {
   - Collaborated with designers, artists and engineers across disciplines
   - Bug fixing, optimization and profiling
 
+  // PROJECT_02 - Unannounced title (WIP, NDA) - Lead-level role
+  - Sole owner of the game's entire UI, end-to-end
+  - Built several complete gameplay systems
+  - Developed tools to automate localization
+  - Reviewed code across the team
+  - Mentored internal developers and onboarded a new hire
+  - Coordinated with UI front-end and design teams for UI implementation
+  - Managed Steam build releases
+
 > [PREV] Accenture
-  Full Stack Developer — Mar 2022 to Aug 2023
+  Full Stack Developer - Mar 2022 to Aug 2023
   ─────────────────────────────────────
   - Software engineering foundation in architecture, scalable systems, APIs, CI/CD
   - Production experience with enterprise-level codebases and workflows`,
 
     education: `> RETRIEVING ACADEMIC RECORDS...
 
-> [IN PROGRESS] UADE — Buenos Aires
+> [IN PROGRESS] UADE - Buenos Aires
   Facultad de Ingeniería
   Bachelor's Degree in Game Development
   Graduating 2026.
 
-> [2020 - 2023] UBA (FIUBA) — Buenos Aires
+> [2020 - 2023] UBA (FIUBA) - Buenos Aires
   Facultad de Ingeniería
   Bachelor's Degree in System's Analysis
-  (unfinished — pivoted to game development)`,
+  (unfinished - pivoted to game development)`,
 
-    // projects: handled by typeProjectsSequence() — staged boot lines
+    // projects: handled by typeProjectsSequence() - staged boot lines
 };
 
 function showSection(key) {
@@ -235,7 +253,7 @@ function carouselMove(btn, direction) {
 function expandCarousel(el) {
     const carousel = el.closest('.card-carousel');
     const active = carousel ? carousel.querySelector('.carousel-img.active') : null;
-    // Only expand still images — iframes (videos) play inline.
+    // Only expand still images - iframes (videos) play inline.
     if (active && active.tagName === 'IMG') openDiagramModal(active.src, active.alt, '// IMAGE VIEW');
 }
 
