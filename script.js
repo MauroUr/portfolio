@@ -140,8 +140,93 @@ function showSection(key) {
     if (key === 'projects') {
         typeProjectsSequence();
     } else {
-        typeWriter(data[key], 0, key);
+        typeWriter(data[key]);
     }
+}
+
+function parseLine(line) {
+    if (line.trim() === '') return { lineClass: 'term-blank', segments: [] };
+
+    if (/^> [A-Z ]+(?:\.\.\.|READY\.)$/.test(line)) {
+        return { lineClass: 'term-line term-sys', segments: [{ cls: null, text: line }] };
+    }
+
+    let m = line.match(/^> (\[[^\]]+\])\s+(.+)$/);
+    if (m) {
+        return {
+            lineClass: 'term-line term-header',
+            segments: [
+                { cls: 'term-prompt', text: '> ' },
+                { cls: 'term-badge', text: m[1] },
+                { cls: 'term-title', text: ' ' + m[2] }
+            ]
+        };
+    }
+
+    m = line.match(/^(> (NAME|ROLE|FOCUS|LOCATION|CONTACT):)\s+(.+)$/);
+    if (m) {
+        const valClass = (m[2] === 'NAME' || m[2] === 'ROLE') ? 'term-val-strong' : 'term-val';
+        return {
+            lineClass: 'term-line',
+            segments: [
+                { cls: 'term-key', text: m[1] + ' ' },
+                { cls: valClass, text: m[3] }
+            ]
+        };
+    }
+
+    if (/^> [A-Z &]+:$/.test(line)) {
+        return { lineClass: 'term-line term-section', segments: [{ cls: null, text: line }] };
+    }
+
+    m = line.match(/^\s*(\/\/ [A-Z0-9_]+ - )(.+)$/);
+    if (m) {
+        return {
+            lineClass: 'term-line term-project',
+            segments: [
+                { cls: 'term-key', text: m[1] },
+                { cls: 'term-sub', text: m[2] }
+            ]
+        };
+    }
+
+    m = line.match(/^\s*([A-Za-z#+]+)\s+(\.{3,})\s+(\[.+\])$/);
+    if (m) {
+        return {
+            lineClass: 'term-line term-indent term-skill',
+            segments: [
+                { cls: 'term-val-strong', text: m[1] + ' ' },
+                { cls: 'term-dots', text: m[2] + ' ' },
+                { cls: 'term-meta', text: m[3] }
+            ]
+        };
+    }
+
+    if (/^\s*-{5,}$/.test(line)) {
+        return { lineClass: 'term-line term-indent term-divider', segments: [{ cls: null, text: line.trim() }] };
+    }
+
+    m = line.match(/^\s*- (.+)$/);
+    if (m) {
+        return {
+            lineClass: 'term-line term-bullet',
+            segments: [
+                { cls: 'term-key', text: '- ' },
+                { cls: null, text: m[1] }
+            ]
+        };
+    }
+
+    const trimmed = line.trim();
+    if (/^(Unity Developer|Full Stack Developer|Bachelor's Degree)/.test(trimmed)) {
+        return { lineClass: 'term-line term-indent term-sub', segments: [{ cls: null, text: trimmed }] };
+    }
+
+    if (/^(Facultad de|\(unfinished)/.test(trimmed)) {
+        return { lineClass: 'term-line term-indent term-meta', segments: [{ cls: null, text: trimmed }] };
+    }
+
+    return { lineClass: 'term-line term-indent term-p', segments: [{ cls: null, text: trimmed }] };
 }
 
 function typeProjectsSequence() {
@@ -152,20 +237,25 @@ function typeProjectsSequence() {
     ];
     let lineIdx = 0;
     let charIdx = 0;
+    let lineEl = null;
 
     function typeLine() {
+        if (!lineEl) {
+            lineEl = document.createElement('div');
+            lineEl.className = 'term-line term-sys';
+            output.appendChild(lineEl);
+        }
         if (charIdx < lines[lineIdx].length) {
-            output.textContent += lines[lineIdx].charAt(charIdx);
+            lineEl.textContent += lines[lineIdx].charAt(charIdx);
             charIdx++;
             typingTimeout = setTimeout(typeLine, 4);
         } else {
-            const isLast = lineIdx === lines.length - 1;
-            if (isLast) {
+            if (lineIdx === lines.length - 1) {
                 projectShowcase.style.display = 'block';
                 return;
             }
             typingTimeout = setTimeout(() => {
-                output.textContent += '\n';
+                lineEl = null;
                 lineIdx++;
                 charIdx = 0;
                 typeLine();
@@ -176,12 +266,64 @@ function typeProjectsSequence() {
     typeLine();
 }
 
-function typeWriter(text, i, currentKey) {
-    if (i < text.length) {
-        output.textContent += text.charAt(i);
-        i++;
-        typingTimeout = setTimeout(() => typeWriter(text, i, currentKey), 4);
+function typeWriter(text) {
+    const parsedLines = text.split('\n').map(parseLine);
+    let lineIdx = 0;
+    let segIdx = 0;
+    let charIdx = 0;
+    let lineEl = null;
+    let segEl = null;
+
+    function step() {
+        if (lineIdx >= parsedLines.length) return;
+        const currentLine = parsedLines[lineIdx];
+
+        if (!lineEl) {
+            lineEl = document.createElement('div');
+            lineEl.className = currentLine.lineClass;
+            output.appendChild(lineEl);
+            if (currentLine.segments.length === 0) {
+                lineEl = null;
+                lineIdx++;
+                typingTimeout = setTimeout(step, 4);
+                return;
+            }
+        }
+
+        const currentSeg = currentLine.segments[segIdx];
+        if (!segEl) {
+            if (currentSeg.cls) {
+                segEl = document.createElement('span');
+                segEl.className = currentSeg.cls;
+            } else {
+                segEl = document.createTextNode('');
+            }
+            lineEl.appendChild(segEl);
+        }
+
+        if (charIdx < currentSeg.text.length) {
+            segEl.textContent += currentSeg.text.charAt(charIdx);
+            charIdx++;
+            typingTimeout = setTimeout(step, 4);
+        } else {
+            segEl = null;
+            charIdx = 0;
+            segIdx++;
+            if (segIdx >= currentLine.segments.length) {
+                const isSysLine = currentLine.lineClass.includes('term-sys');
+                lineEl = null;
+                segIdx = 0;
+                lineIdx++;
+                if (isSysLine) {
+                    typingTimeout = setTimeout(step, 1000);
+                    return;
+                }
+            }
+            step();
+        }
     }
+
+    step();
 }
 
 function filterProjects(category) {

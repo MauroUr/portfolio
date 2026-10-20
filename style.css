@@ -158,13 +158,110 @@ body::before {
 
 #console-output {
     margin-bottom: 20px;
-    line-height: 1.7;
-
-    white-space: pre-line;
+    line-height: 1.65;
     font-size: clamp(0.88rem, 0.84rem + 0.2vw, 1.02rem);
     letter-spacing: 0.3px;
-    max-width: 75ch;
+    max-width: 72ch;
     color: var(--green-body);
+}
+
+.term-blank {
+    height: 0.75rem;
+}
+
+.term-line {
+    margin: 2px 0;
+}
+
+.term-sys {
+    color: var(--green-muted);
+    letter-spacing: 0.8px;
+}
+
+.term-section {
+    color: var(--green-neon);
+    font-weight: bold;
+    font-size: 1.06em;
+    letter-spacing: 0.8px;
+    margin-top: 0.35rem;
+    margin-bottom: 0.2rem;
+}
+
+.term-header {
+    margin-top: 0.35rem;
+    margin-bottom: 0.15rem;
+}
+
+.term-prompt,
+.term-key {
+    color: var(--green-neon);
+    font-weight: bold;
+}
+
+.term-badge {
+    background: var(--green-neon);
+    color: var(--bg-primary);
+    font-weight: bold;
+    font-size: 0.78em;
+    padding: 1px 7px;
+    letter-spacing: 0.8px;
+}
+
+.term-title {
+    color: var(--green-neon);
+    font-weight: bold;
+    font-size: 1.08em;
+}
+
+.term-val {
+    color: var(--white-soft);
+}
+
+.term-val-strong,
+.term-sub {
+    color: var(--white-soft);
+    font-weight: bold;
+}
+
+.term-meta {
+    color: var(--green-muted);
+}
+
+.term-dots {
+    color: var(--green-dim);
+    opacity: 0.55;
+}
+
+.term-divider {
+    color: var(--green-dim);
+    opacity: 0.5;
+    margin: 4px 0 8px 0;
+}
+
+.term-indent {
+    padding-left: 1.25rem;
+}
+
+.term-skill {
+    white-space: pre-wrap;
+}
+
+.term-project {
+    margin-top: 0.55rem;
+    margin-bottom: 0.2rem;
+    border-left: 2px solid var(--green-neon);
+    padding-left: 0.65rem;
+    margin-left: 1.25rem;
+}
+
+.term-bullet {
+    padding-left: 2.3rem;
+    text-indent: -1.05rem;
+    margin: 3px 0;
+}
+
+.term-p {
+    line-height: 1.7;
 }
 
 .filter-section {
