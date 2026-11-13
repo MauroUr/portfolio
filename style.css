@@ -393,14 +393,59 @@ body::before {
     opacity: 1;
 }
 
-iframe.carousel-video {
+.carousel-video {
     border: 0;
+    padding: 0;
     background: #000;
-    object-fit: unset;
     pointer-events: none;
 }
-iframe.carousel-video.active {
+.carousel-video.active {
     pointer-events: auto;
+}
+
+.video-facade {
+    cursor: pointer;
+}
+
+.video-facade img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--green-neon);
+    box-shadow: 0 0 10px var(--green-glow);
+    transition: background 0.2s;
+}
+
+.video-play::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%);
+    border-style: solid;
+    border-width: 9px 0 9px 15px;
+    border-color: transparent transparent transparent var(--green-neon);
+}
+
+@media (hover: hover) {
+    .video-facade:hover .video-play {
+        background: var(--green-neon);
+    }
+
+    .video-facade:hover .video-play::after {
+        border-left-color: var(--bg-surface);
+    }
 }
 
 .carousel-img--zoomable {
@@ -411,7 +456,7 @@ iframe.carousel-video.active {
     cursor: zoom-in;
 }
 
-.card-carousel:has(iframe.carousel-video.active) .carousel-zoom-hint {
+.card-carousel:has(.carousel-video.active) .carousel-zoom-hint {
     display: none;
 }
 
@@ -450,14 +495,10 @@ iframe.carousel-video.active {
     opacity: 1;
 }
 
-.carousel-btn:hover {
-    background: var(--green-neon);
-    color: var(--bg-surface);
-}
-
-@media (hover: none) {
-    .carousel-btn {
-        opacity: 1;
+@media (hover: hover) {
+    .carousel-btn:hover {
+        background: var(--green-neon);
+        color: var(--bg-surface);
     }
 }
 
@@ -472,12 +513,20 @@ iframe.carousel-video.active {
 }
 
 .dot {
+    position: relative;
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: rgba(0, 255, 65, 0.35);
     border: 1px solid var(--green-neon);
     transition: background 0.2s;
+    cursor: pointer;
+}
+
+.dot::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
 }
 
 .dot.active {
@@ -1029,6 +1078,15 @@ body.modal-open {
 
     .card-img {
         height: 180px;
+    }
+
+    .carousel-dots {
+        gap: 8px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
     }
 
     .lead-quote {

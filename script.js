@@ -344,30 +344,62 @@ function filterProjects(category) {
     });
 }
 
-function carouselMove(el, direction) {
-    const carousel = el.closest('.card-carousel');
+function activeSlideIndex(carousel) {
+    return [...carousel.querySelectorAll('.carousel-img')].findIndex(img => img.classList.contains('active'));
+}
+
+function carouselShow(carousel, index) {
     const imgs = carousel.querySelectorAll('.carousel-img');
     const dots = carousel.querySelectorAll('.dot');
+    const current = activeSlideIndex(carousel);
+    if (index === current) return;
 
-    let current = [...imgs].findIndex(img => img.classList.contains('active'));
-    const prevEl = imgs[current];
     imgs[current].classList.remove('active');
     dots[current].classList.remove('active');
+    imgs[index].classList.add('active');
+    dots[index].classList.add('active');
 
-    current = (current + direction + imgs.length) % imgs.length;
-    imgs[current].classList.add('active');
-    dots[current].classList.add('active');
-
-    if (prevEl.tagName === 'IFRAME') {
-        prevEl.src = prevEl.src;
+    if (imgs[current].tagName === 'IFRAME') {
+        stopCarouselVideo(imgs[current]);
     }
+}
+
+function carouselMove(el, direction) {
+    const carousel = el.closest('.card-carousel');
+    const count = carousel.querySelectorAll('.carousel-img').length;
+    carouselShow(carousel, (activeSlideIndex(carousel) + direction + count) % count);
+}
+
+// Videos start as a thumbnail button: an embedded player swallows touches, so
+// the iframe only exists while it plays and the slide stays swipeable otherwise.
+const videoFacades = new WeakMap();
+
+function playCarouselVideo(facade) {
+    const iframe = document.createElement('iframe');
+    iframe.className = 'carousel-img carousel-video active';
+    iframe.src = `https://www.youtube-nocookie.com/embed/${facade.dataset.videoId}?autoplay=1&playsinline=1`;
+    iframe.title = facade.dataset.videoTitle;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    videoFacades.set(iframe, facade);
+    facade.replaceWith(iframe);
+}
+
+function stopCarouselVideo(iframe) {
+    const facade = videoFacades.get(iframe);
+    facade.classList.toggle('active', iframe.classList.contains('active'));
+    iframe.replaceWith(facade);
 }
 
 const SWIPE_MIN_DISTANCE = 40;
 
-function initCarouselSwipe() {
+function initCarousels() {
     document.querySelectorAll('.card-carousel').forEach(carousel => {
         if (carousel.querySelectorAll('.carousel-img').length < 2) return;
+
+        carousel.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.addEventListener('click', () => carouselShow(carousel, i));
+        });
 
         let startX = 0;
         let startY = 0;
@@ -428,6 +460,6 @@ document.addEventListener('keydown', (e) => {
 });
 
 window.onload = () => {
-    initCarouselSwipe();
+    initCarousels();
     showSection('projects');
 };
