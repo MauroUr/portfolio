@@ -243,6 +243,8 @@ body::before {
 }
 
 .term-skill {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
     white-space: pre-wrap;
 }
 
@@ -451,6 +453,12 @@ iframe.carousel-video.active {
 .carousel-btn:hover {
     background: var(--green-neon);
     color: var(--bg-surface);
+}
+
+@media (hover: none) {
+    .carousel-btn {
+        opacity: 1;
+    }
 }
 
 .carousel-dots {
@@ -1065,6 +1073,14 @@ body.modal-open {
     .nav-btn {
         font-size: 0.72rem;
         padding: 6px 8px;
+    }
+
+    .term-skill {
+        grid-template-columns: 7ch 1fr;
+    }
+
+    .term-skill .term-dots {
+        display: none;
     }
 }
 

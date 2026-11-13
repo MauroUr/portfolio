@@ -344,8 +344,8 @@ function filterProjects(category) {
     });
 }
 
-function carouselMove(btn, direction) {
-    const carousel = btn.closest('.card-carousel');
+function carouselMove(el, direction) {
+    const carousel = el.closest('.card-carousel');
     const imgs = carousel.querySelectorAll('.carousel-img');
     const dots = carousel.querySelectorAll('.dot');
 
@@ -361,6 +361,33 @@ function carouselMove(btn, direction) {
     if (prevEl.tagName === 'IFRAME') {
         prevEl.src = prevEl.src;
     }
+}
+
+const SWIPE_MIN_DISTANCE = 40;
+
+function initCarouselSwipe() {
+    document.querySelectorAll('.card-carousel').forEach(carousel => {
+        if (carousel.querySelectorAll('.carousel-img').length < 2) return;
+
+        let startX = 0;
+        let startY = 0;
+        let tracking = false;
+
+        carousel.addEventListener('touchstart', (e) => {
+            tracking = e.touches.length === 1;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', (e) => {
+            if (!tracking) return;
+            tracking = false;
+            const dx = e.changedTouches[0].clientX - startX;
+            const dy = e.changedTouches[0].clientY - startY;
+            if (Math.abs(dx) < SWIPE_MIN_DISTANCE || Math.abs(dx) < Math.abs(dy)) return;
+            carouselMove(carousel, dx < 0 ? 1 : -1);
+        });
+    });
 }
 
 function expandCarousel(el) {
@@ -400,4 +427,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-window.onload = () => showSection('projects');
+window.onload = () => {
+    initCarouselSwipe();
+    showSection('projects');
+};
