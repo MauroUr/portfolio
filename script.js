@@ -392,6 +392,9 @@ function stopCarouselVideo(iframe) {
 }
 
 const SWIPE_MIN_DISTANCE = 40;
+const TAP_MAX_DISTANCE = 10;
+const SIDE_TAP_ZONE = 0.25;
+const ARROWS_HIDE_DELAY = 2500;
 
 function initCarousels() {
     document.querySelectorAll('.card-carousel').forEach(carousel => {
@@ -400,6 +403,15 @@ function initCarousels() {
         carousel.querySelectorAll('.dot').forEach((dot, i) => {
             dot.addEventListener('click', () => carouselShow(carousel, i));
         });
+
+        // Touch screens have no hover, so the arrows show for a moment after a
+        // swipe or a tap near either side, then fade out again.
+        let hideArrowsTimeout;
+        const showArrows = () => {
+            carousel.classList.add('arrows-visible');
+            clearTimeout(hideArrowsTimeout);
+            hideArrowsTimeout = setTimeout(() => carousel.classList.remove('arrows-visible'), ARROWS_HIDE_DELAY);
+        };
 
         let startX = 0;
         let startY = 0;
@@ -414,10 +426,29 @@ function initCarousels() {
         carousel.addEventListener('touchend', (e) => {
             if (!tracking) return;
             tracking = false;
-            const dx = e.changedTouches[0].clientX - startX;
-            const dy = e.changedTouches[0].clientY - startY;
-            if (Math.abs(dx) < SWIPE_MIN_DISTANCE || Math.abs(dx) < Math.abs(dy)) return;
-            carouselMove(carousel, dx < 0 ? 1 : -1);
+            const touch = e.changedTouches[0];
+            const dx = touch.clientX - startX;
+            const dy = touch.clientY - startY;
+
+            if (Math.abs(dx) >= SWIPE_MIN_DISTANCE && Math.abs(dx) > Math.abs(dy)) {
+                carouselMove(carousel, dx < 0 ? 1 : -1);
+                showArrows();
+                return;
+            }
+
+            if (Math.abs(dx) > TAP_MAX_DISTANCE || Math.abs(dy) > TAP_MAX_DISTANCE) return;
+
+            if (e.target.closest('.carousel-btn')) {
+                showArrows();
+                return;
+            }
+
+            const rect = carousel.getBoundingClientRect();
+            const x = (touch.clientX - rect.left) / rect.width;
+            if (x < SIDE_TAP_ZONE || x > 1 - SIDE_TAP_ZONE) {
+                e.preventDefault(); // a side tap only reveals the arrows; don't open the image or start the video
+                showArrows();
+            }
         });
     });
 }

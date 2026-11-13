@@ -491,14 +491,24 @@ body::before {
 .carousel-btn.prev { left: 6px; }
 .carousel-btn.next { right: 6px; }
 
-.card-carousel:hover .carousel-btn {
+.card-carousel.arrows-visible .carousel-btn {
     opacity: 1;
 }
 
 @media (hover: hover) {
+    .card-carousel:hover .carousel-btn {
+        opacity: 1;
+    }
+
     .carousel-btn:hover {
         background: var(--green-neon);
         color: var(--bg-surface);
+    }
+}
+
+@media (hover: none) {
+    .card-carousel:not(.arrows-visible) .carousel-btn {
+        pointer-events: none;
     }
 }
 
